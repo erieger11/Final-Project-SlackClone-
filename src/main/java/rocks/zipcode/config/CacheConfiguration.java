@@ -50,6 +50,18 @@ public class CacheConfiguration {
             createCache(cm, rocks.zipcode.domain.User.class.getName());
             createCache(cm, rocks.zipcode.domain.Authority.class.getName());
             createCache(cm, rocks.zipcode.domain.User.class.getName() + ".authorities");
+            createCache(cm, rocks.zipcode.domain.UserProfile.class.getName());
+            createCache(cm, rocks.zipcode.domain.UserProfile.class.getName() + ".workspaces");
+            createCache(cm, rocks.zipcode.domain.UserProfile.class.getName() + ".channels");
+            createCache(cm, rocks.zipcode.domain.Workspace.class.getName());
+            createCache(cm, rocks.zipcode.domain.Workspace.class.getName() + ".members");
+            createCache(cm, rocks.zipcode.domain.Channel.class.getName());
+            createCache(cm, rocks.zipcode.domain.Channel.class.getName() + ".members");
+            createCache(cm, rocks.zipcode.domain.Message.class.getName());
+            createCache(cm, rocks.zipcode.domain.Message.class.getName() + ".senders");
+            createCache(cm, rocks.zipcode.domain.Message.class.getName() + ".channels");
+            createCache(cm, rocks.zipcode.domain.Mention.class.getName());
+            createCache(cm, rocks.zipcode.domain.Mention.class.getName() + ".messages");
             // jhipster-needle-ehcache-add-entry
         };
     }
