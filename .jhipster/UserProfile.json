@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20240501180643"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "timezone",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "UserProfile",
+  "relationships": [
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "sender",
+      "relationshipName": "messages",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workspace",
+      "otherEntityRelationshipName": "members",
+      "relationshipName": "workspaces",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "channel",
+      "otherEntityRelationshipName": "members",
+      "relationshipName": "channels",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20240501180646"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "uploads",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pinned",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "timestamp",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Message",
+  "relationships": [
+    {
+      "otherEntityName": "mention",
+      "otherEntityRelationshipName": "message",
+      "relationshipName": "mentions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "messages",
+      "relationshipName": "sender",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "channel",
+      "otherEntityRelationshipName": "messages",
+      "relationshipName": "channel",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
