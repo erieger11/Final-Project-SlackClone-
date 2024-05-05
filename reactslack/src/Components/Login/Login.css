@@ -1,18 +1,20 @@
 .wrapper {
   position: relative;
   width: 420px;
-  height: auto;
-  background: seagreen;
+  height: 450px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #fff;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  /* overflow: hidden; */
+  overflow: hidden;
   transition: height 0.2s ease;
 }
-.wrapper .active {
+
+.wrapper.active {
   height: 520px;
 }
 
@@ -20,49 +22,51 @@
   width: 100%;
   padding: 40px;
 }
-.wrapper.active.form-box.login {
-  transition: none;
-  translate: -400px;
-}
-.wrapper.form-box.login {
+
+.wrapper .form-box.login {
   transition: translate 0.18s ease;
   translate: 0;
+}
+
+.wrapper.active .form-box.login {
+  transition: none;
+  translate: -400px;
 }
 
 .wrapper .form-box.register {
   position: absolute;
   transition: none;
-  transform: translateX(400px);
+  translate: 400px;
 }
-.wrapper.active.form-box.register {
+
+.wrapper.active .form-box.register {
   transition: translate 0.18s ease;
   translate: 0;
 }
 
 form h1 {
-  font-size: 24px;
+  font-size: 36px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 form .input-box {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  height: 50px;
+  margin: 30px 0;
 }
 
 .input-box input {
-  width: calc(100% - 40px);
-  height: 50px;
+  width: 100%;
+  height: 100%;
   background: transparent;
   border: none;
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
+  border-radius: 40px;
   font-size: 16px;
   color: #fff;
-  padding: 0 20px;
-  box-sizing: border-box;
+  padding: 20px 45px 20px 20px;
 }
 
 .input-box input::placeholder {
@@ -70,24 +74,23 @@ form .input-box {
 }
 
 .input-box .icon {
-  position: relative;
-  right: 40px;
+  position: absolute;
+  right: 20px;
   top: 50%;
-  transform: translateY(50%);
+  translate: 0 -50%;
   font-size: 16px;
 }
 
 form .remember-forgot {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 14.5px;
   margin: -15px 0 15px;
 }
 
 .remember-forgot label input {
-  accent-color: #fff; /* Not a valid CSS property */
+  accent-color: #fff;
   margin-right: 4px;
-  vertical-align: middle;
 }
 
 .remember-forgot a {
@@ -105,7 +108,7 @@ form button {
   background: #fff;
   border: none;
   outline: none;
-  border-radius: 25px;
+  border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 16px;
@@ -114,9 +117,9 @@ form button {
 }
 
 form .register-link {
-  font-size: 14px;
+  font-size: 14.5px;
   text-align: center;
-  margin-top: 20px;
+  margin: 20px 0 15px;
 }
 
 .register-link p a {
