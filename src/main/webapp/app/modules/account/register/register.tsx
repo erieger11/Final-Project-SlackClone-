@@ -61,6 +61,7 @@ export const RegisterPage = () => {
               data-cy="username"
             />
             <ValidatedField
+              className="wrapper"
               name="email"
               label="Email"
               placeholder="Your email"
