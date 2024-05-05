@@ -1,15 +1,18 @@
+import React, { useState } from 'react';
 import './Login.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
-import React, { useState } from 'react';
 
 const Login = () => {
   const [action, setAction] = useState('');
+
   const registerLink = () => {
-    setAction('active');
+    setAction(' active');
   };
+
   const loginLink = () => {
     setAction('');
   };
+
   return (
     <div className={`wrapper${action}`}>
       <div className="form-box login">
@@ -23,16 +26,20 @@ const Login = () => {
             <input type="password" placeholder="Password" required />
             <FaLock className="icon" />
           </div>
+
           <div className="remember-forgot">
             <label>
-              <input type="checkbox"></input>Remember me
+              <input type="checkbox" />
+              Remember me
             </label>
             <a href="#">Forgot password?</a>
           </div>
+
           <button type="submit">Login</button>
+
           <div className="register-link">
             <p>
-              Don't have an account?
+              Don't have an account?{' '}
               <a href="#" onClick={registerLink}>
                 Register
               </a>
@@ -43,7 +50,7 @@ const Login = () => {
 
       <div className="form-box register">
         <form action="">
-          <h1>Register</h1>
+          <h1>Registration</h1>
           <div className="input-box">
             <input type="text" placeholder="Username" required />
             <FaUser className="icon" />
@@ -56,15 +63,18 @@ const Login = () => {
             <input type="password" placeholder="Password" required />
             <FaLock className="icon" />
           </div>
+
           <div className="remember-forgot">
             <label>
-              <input type="checkbox"></input>I agree to the terms & conditions
+              <input type="checkbox" />I agree to the terms & conditions
             </label>
           </div>
+
           <button type="submit">Register</button>
+
           <div className="register-link">
             <p>
-              Already have account?
+              Already have an account?{' '}
               <a href="#" onClick={loginLink}>
                 Login
               </a>
