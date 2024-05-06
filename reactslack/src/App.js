@@ -1,11 +1,22 @@
+import Sidebar from './Components/Sidebar/sidebar';
 import './App.css';
-import Login from './Components/Login/login';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+//import Login from './Components/Login/login';
 
 function App() {
+  const channels = [
+    {
+      name: 'General',
+      description: 'General discussion channel',
+    },
+    {
+      name: 'Announcements',
+      description: 'Channel for important announcements',
+    },
+    // Add more channel objects as needed
+  ];
   return (
-    <div className="app">
-      <Login />
+    <div className="App">
+      <Sidebar />
     </div>
   );
 }
