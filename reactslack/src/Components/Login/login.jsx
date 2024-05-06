@@ -10,14 +10,15 @@ const Login = () => {
 
   const registerLink = () => {
     setRegisterAction(' active');
-    setLoginAction('');
+    setLoginAction(' active');
   };
 
+
   const loginLink = () => {
-    setLoginAction('active');
-    setRegisterAction('');
-//     var username = usernameRef.current.value;
-//     var password = passwordRef.current.value;
+    setLoginAction(' active');
+    setRegisterAction(' active');
+    var username = usernameRef.current.value;
+    var password = passwordRef.current.value;
 
     console.log('Login clicked');
    //set the login credintials
@@ -28,8 +29,8 @@ const Login = () => {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        username:'admin',//usernameRef.current.value,
-        password:'admin'//passwordRef.current.value
+        username:'ethan',//usernameRef.current.value,
+        password:'ethan'//passwordRef.current.value
       })
     })
       .then((response) => {
@@ -41,7 +42,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
 
-        window.location.href = '/thinair';
+        window.location.href = '/thinAir';
       })
       .catch((error) => {
         console.error('login problem', error);
