@@ -1,19 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Components/Login/login';
 import Home from './Components/Home/Home'; // Import your Home component
+import { Container } from 'reactstrap';
+import Header from './Components/Header';
 
 function App() {
   return (
     <>
+      {/* <Header /> */}
       <Router>
-        <Login />
-        <Routes>
-          <Route path="/" />
-          <Route path="/" element={<Home />} /> {/* Home page as default */}
-          <Route path="/login" element={<Login />} /> {/* Login page at specific path */}
-        </Routes>
-        <Link to="/login">Login</Link>
+        <Container>
+          <Routes>
+            <Route path="/home" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/" element={<Login />} /> {/* Login page as first screen*/}
+          </Routes>
+        </Container>
       </Router>
     </>
   );
