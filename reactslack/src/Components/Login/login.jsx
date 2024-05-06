@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './Login.css';
-import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 
 const Login = () => {
   const [loginAction, setLoginAction] = useState('');
@@ -109,6 +109,20 @@ const Login = () => {
           </div>
           <div className="input-box">
             <input type="password" placeholder="Password" required id="password" />
+            <input type="email" placeholder="Email" required />
+            <FaEnvelope className="icon" />
+          </div>
+          <div className="input-box">
+            <input type="text" placeholder="Phone-Number" required />
+            <FaPhoneSquare className="icon" />
+          </div>
+          <div className="input-box">
+            <input type="text" placeholder="Username" required />
+            <FaUser className="icon" />
+          </div>
+          <div className="input-box">
+            <input type="password" placeholder="Password" required />
+
             <FaLock className="icon" />
           </div>
 
