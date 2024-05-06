@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import Sidebar from './Components/Sidebar/sidebar';
 import './App.css';
+import Channel from './Components/Channels/channels';
+//import Login from './Components/Login/login';
+// import DirectMessage from './Components/SideBar/DirectMessage/directmessage';
 
 function App() {
+  const channels = [
+    {
+      name: 'General',
+      description: 'General discussion channel',
+    },
+    {
+      name: 'Announcements',
+      description: 'Channel for important announcements',
+    },
+    // Add more channel objects as needed
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <h1>HELLO WORLD</h1>
-        <h2>GOODBYE DIKSHA</h2>
-
-        <h1>Hello</h1>
-
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      {/* <Login/>     */}
+      <Sidebar />
+      <channels />
+      {/* <DirectMessage/> */}
     </div>
   );
 }
