@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Components/Login/login';
+import Home from './Components/Home/Home'; // Import your Home component
+import { Container } from 'reactstrap';
+import Header from './Components/Header';
+import Rightsidebar from './Components/RightSidebar/RightSidebar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <h1>HELLO WORLD</h1>
-        <h2>GOODBYE DIKSHA</h2>
-
-        <h1>Hello</h1>
-
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Header /> */}
+      <Router>
+        <Rightsidebar />
+        <Container>
+          <Routes>
+            <Route path="/" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/login" element={<Login />} /> {/* Login page as first screen*/}
+          </Routes>
+        </Container>
+      </Router>
+    </>
   );
 }
 
