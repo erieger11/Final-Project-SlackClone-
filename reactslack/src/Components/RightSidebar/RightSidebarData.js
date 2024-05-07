@@ -1,5 +1,5 @@
 import React from 'react';
-import * as TbIcons from 'react-icons/tb';
+import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
@@ -11,9 +11,9 @@ export const RightsidebarData = [
     cName: 'rightsidebar-text',
   },
   {
-    title: 'Login',
-    path: '/login',
-    icon: <AiIcons.AiFillHome />,
+    title: 'Active-Users',
+    path: '/Workspace',
+    icon: <FaUserFriends.FaFillActiveUsers />,
     cName: 'rightsidebar-text',
   },
   {

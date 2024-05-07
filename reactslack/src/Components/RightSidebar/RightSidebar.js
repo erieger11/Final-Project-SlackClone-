@@ -4,21 +4,21 @@ import * as TbIcons from 'react-icons/tb';
 import * as AiIcons from 'react-icons/ai';
 
 function Rightsidebar() {
-  const [rightsidebar, setRightSidebar] = useState(false);
+  const [, setRightSidebar] = useState(false);
 
-  const showRightSidebar = () => setRightSidebar(!rightsidebar);
+  const showRightSidebar = () => setRightSidebar(!setRightSidebar);
 
   return (
     <>
       <div className="rightsidebar">
-        <Link to="#" className="menu-bars">
+        <Link href="#/" className="menu-bars">
           <TbIcons.TbLayoutSidebarRightExpand onClick={showRightSidebar} />
         </Link>
       </div>
-      <nav className={sidebar ? 'right-menu active' : 'right-menu'}>
+      <nav className={setRightSidebar ? 'right-menu active' : 'right-menu'}>
         <ul className="right-menu-items">
           <li className="rightbar-toggle">
-            <Link to="#" className="menu-bars">
+            <Link href="#/" className="menu-bars">
               <AiIcons.AiOutlineCloseSquare />
             </Link>
           </li>
@@ -28,4 +28,4 @@ function Rightsidebar() {
   );
 }
 
-export default Right - sidebar;
+export default Rightsidebar;
