@@ -6,10 +6,10 @@ function Home() {
   return (
     <HomeContainer>
       <div className="home-container">
-        <h1>Welcome to TableTalk</h1>
-        <p>{'    '}Please sign in or register to get started.</p>
+        <h1>Welcome to Tabletalk</h1>
+        <p>Please sign in or register to get started.</p>
         <div className="button-container">
-          <Link to="/" className="login-button">
+          <Link to="/login" className="login-button">
             Login/Register
           </Link>
         </div>
