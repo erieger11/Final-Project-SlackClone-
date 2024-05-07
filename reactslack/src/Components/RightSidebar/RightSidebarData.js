@@ -1,7 +1,7 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 export const RightsidebarData = [
   {
@@ -11,15 +11,15 @@ export const RightsidebarData = [
     cName: 'rightsidebar-text',
   },
   {
-    title: 'Active-Users',
-    path: '/Workspace',
-    icon: <FaUserFriends.FaFillActiveUsers />,
+    title: 'ActiveUsers',
+    path: '/activeUsers',
+    icon: <FaIcons.FaUserFriends />,
     cName: 'rightsidebar-text',
   },
   {
     title: 'Direct Message',
-    path: '/direct message',
-    icon: <AiIcons.AiFillHome />,
+    path: '/directMessage',
+    icon: <RiIcons.RiSendPlaneFill />,
     cName: 'rightsidebar-text',
   },
 ];
