@@ -6,7 +6,7 @@ import Rightsidebar from './Components/RightSidebar/RightSidebar';
 import Sidebar from './Components/Sidebar/sidebar';
 import './App.css';
 
-function App() {
+function MainUI() {
   return (
     <>
       <Router>
@@ -24,4 +24,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainUI;
