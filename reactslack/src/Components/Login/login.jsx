@@ -10,12 +10,12 @@ const Login = () => {
 
   const registerLink = () => {
     setRegisterAction(' active');
-    setLoginAction('');
+    setLoginAction(' active');
   };
 
   const loginLink = () => {
-    setLoginAction('active');
-    setRegisterAction('');
+    setLoginAction(' active');
+    setRegisterAction(' active');
 //     var username = usernameRef.current.value;
 //     var password = passwordRef.current.value;
 
@@ -107,19 +107,12 @@ const Login = () => {
             <input type="email" placeholder="Email" required id="email" />
             <FaEnvelope className="icon" />
           </div>
-          <div className="input-box">
-            <input type="password" placeholder="Password" required id="password" />
-            <input type="email" placeholder="Email" required />
-            <FaEnvelope className="icon" />
-          </div>
+  
           <div className="input-box">
             <input type="text" placeholder="Phone-Number" required />
             <FaPhoneSquare className="icon" />
           </div>
-          <div className="input-box">
-            <input type="text" placeholder="Username" required />
-            <FaUser className="icon" />
-          </div>
+         
           <div className="input-box">
             <input type="password" placeholder="Password" required />
 
