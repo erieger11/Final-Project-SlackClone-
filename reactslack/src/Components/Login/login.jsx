@@ -10,46 +10,45 @@ const Login = () => {
 
   const registerLink = () => {
     setRegisterAction(' active');
-    setLoginAction('');
+    setLoginAction(' active');
   };
 
   const loginLink = () => {
-    setLoginAction('active');
-    setRegisterAction('');
-//     var username = usernameRef.current.value;
-//     var password = passwordRef.current.value;
+    setLoginAction(' ');
+    setRegisterAction(' ');
+    //     var username = usernameRef.current.value;
+    //     var password = passwordRef.current.value;
 
     console.log('Login clicked');
-   //set the login credintials
+    //set the login credintials
 
-
-//fix the reqeust
+    //fix the reqeust
     fetch('http://localhost:8080/api/authenticate', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        username:'admin',//usernameRef.current.value,
-        password:'admin'//passwordRef.current.value
-      })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'admin', //usernameRef.current.value,
+        password: 'admin', //passwordRef.current.value
+      }),
     })
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         console.log(data);
 
         window.location.href = '/thinair';
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('login problem', error);
         alert('Still wrong');
       });
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = e => {
     e.preventDefault();
     var username = usernameRef.current.value;
     var email = document.getElementById('email').value;
@@ -108,21 +107,11 @@ const Login = () => {
             <FaEnvelope className="icon" />
           </div>
           <div className="input-box">
-            <input type="password" placeholder="Password" required id="password" />
-            <input type="email" placeholder="Email" required />
-            <FaEnvelope className="icon" />
-          </div>
-          <div className="input-box">
             <input type="text" placeholder="Phone-Number" required />
             <FaPhoneSquare className="icon" />
           </div>
           <div className="input-box">
-            <input type="text" placeholder="Username" required />
-            <FaUser className="icon" />
-          </div>
-          <div className="input-box">
             <input type="password" placeholder="Password" required />
-
             <FaLock className="icon" />
           </div>
 
