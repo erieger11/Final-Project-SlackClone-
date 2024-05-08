@@ -6,7 +6,7 @@ import Rightsidebar from './Components/RightSidebar/RightSidebar';
 import Sidebar from './Components/Sidebar/sidebar';
 import './App.css';
 
-function App() {
+function MainUI() {
   return (
     <>
       <Router>
@@ -16,7 +16,6 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} /> {/* Route for Home component */}
-            <Route path="/home" element={<Home />} /> {/* Route for Home component */}
             <Route path="/login" element={<Login />} /> {/* Login page as first screen*/}
           </Routes>
         </Container>
@@ -25,4 +24,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainUI;
