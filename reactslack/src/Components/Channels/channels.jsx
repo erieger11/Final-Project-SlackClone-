@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { Link } from "react-router-dom"; // Import Link
 import { setChannel } from "./../../store/actioncreator";
 import { Notification } from "./Notification/notification";
 import "./Channels.css";
@@ -56,7 +56,9 @@ const Channels = (props) => {
           <Menu.Item
             key={channel.id}
             name={channel.name}
-            onClick={() => selectChannel(channel)}
+            // Use Link to wrap the channel names
+            as={Link}
+            to={`/channel/${channel.id}`} // Link to the channel page
             active={
               props.channel &&
               channel.id === props.channel.id &&

@@ -1,11 +1,35 @@
-.ui.menu .item {
-  color: rgb(180, 180, 185) !important;
+/* Channels.css */
+
+.channels {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ccc;
 }
 
-.clickable:hover {
+.channels h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #666;
+}
+
+.channels ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.channels ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #444;
   cursor: pointer;
 }
 
-.ui.menu .item.active {
-  background: #1164a3 !important;
+.channels ul li:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
 }

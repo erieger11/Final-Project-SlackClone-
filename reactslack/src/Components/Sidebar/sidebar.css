@@ -32,7 +32,7 @@
 /* sidebar.css */
 
 .sidebar {
-  width: 200px;
+  width: 250px;
   height: 100%;
   background-color: #72d5e2;
   color: #fff;
@@ -40,6 +40,12 @@
   position: fixed; /* Fixes the sidebar position */
   left: 0; /* Positions the sidebar on the left side */
   top: 0; /* Aligns the sidebar to the top */
+}
+
+.sidebar h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #fff;
 }
 
 .sidebar h2 {
