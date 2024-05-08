@@ -16,7 +16,7 @@ const UserInfo = (props) => {
   };
 
   const signOut = () => {
-    firebase
+    MySQL
       .auth()
       .signOut()
       .then(() => console.log("user signed out"));
