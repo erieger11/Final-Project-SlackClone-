@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { Link } from "react-router-dom"; 
 import { setChannel } from "./../../store/actioncreator";
 import { Notification } from "./Notification/notification";
 import "./Channels.css";
@@ -53,22 +53,13 @@ const Channels = (props) => {
     if (channelsState.length > 0) {
       return channelsState.map((channel) => {
         return (
-          <Menu.Item
-            key={channel.id}
-            name={channel.name}
-            onClick={() => selectChannel(channel)}
-            active={
-              props.channel &&
-              channel.id === props.channel.id &&
-              !props.channel.isFavourite
-            }
-          >
-            <Notification
-              user={props.user}
-              channel={props.channel}
-              notificationChannelId={channel.id}
-              displayName={"# " + channel.name}
-            />
+          <Menu.Item key={channel.id} name={channel.name}>
+            <Link to={`/channel/${channel.id}`}>
+              {channel.name}
+            </Link>
+            <Button onClick={() => handleDeleteChannel(channel.id)}>
+              Delete
+            </Button>
           </Menu.Item>
         );
       });
@@ -128,6 +119,11 @@ const Channels = (props) => {
       updatedState[target.name] = target.value;
       return updatedState;
     });
+  };
+
+  const handleDeleteChannel = (channelId) => {
+    const updatedChannels = channelsState.filter(channel => channel.id !== channelId);
+    setChannelsState(updatedChannels);
   };
 
   return (
