@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -24,6 +23,11 @@ const Sidebar = () => {
     setNewChannelName("");
   };
 
+  const handleDeleteChannel = (channelId) => {
+    const updatedChannels = channels.filter(channel => channel.id !== channelId);
+    setChannels(updatedChannels);
+  };
+
   return (
     <aside className="sidebar">
       <h1>RubberMan 10.0</h1>
@@ -32,7 +36,8 @@ const Sidebar = () => {
         {/* Render list of channels */}
         {channels.map(channel => (
           <li key={channel.id}>
-            <Link to={`/channel/${channel.id}`}>{channel.name}</Link>
+            <a href={`/channel/${channel.id}`}>{channel.name}</a>
+            <button onClick={() => handleDeleteChannel(channel.id)}>Delete</button>
           </li>
         ))}
       </ul>

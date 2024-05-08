@@ -1,35 +1,25 @@
 /* Channels.css */
 
-.channels {
-  width: 250px;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-}
-
-.channels h2 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #666;
-}
-
-.channels ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.channels ul li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #444;
+/* Style for the delete button */
+.ui.menu .item .button {
+  margin-left: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
-.channels ul li:hover {
-  color: #000;
-  font-weight: bold;
+.ui.menu .item .button:hover {
+  background-color: #c82333;
 }
 
-.clickable {
+/* Style for the add button */
+.ui.menu .item .clickable {
   cursor: pointer;
+  color: #007bff;
+}
+
+.ui.menu .item .clickable:hover {
+  text-decoration: underline;
 }
