@@ -5,7 +5,8 @@ import { Container } from 'reactstrap';
 import Rightsidebar from './Components/RightSidebar/RightSidebar';
 import Sidebar from './Components/Sidebar/sidebar';
 import MainComponent from './Components/MainComponent/MainComponent';
-// import './App.css';
+import './App.css';
+
 function App() {
   return (
     <>
@@ -15,13 +16,15 @@ function App() {
         <channels />
         <Container>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/main" element={<MainComponent />} />
+            <Route path="/login" element={<Login />} /> {/* Login page as first screen*/}
+            <Route path="/" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/home" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/main" element={<MainComponent />} /> {/* Route for main page*/}
           </Routes>
         </Container>
       </Router>
     </>
   );
 }
+
 export default App;
