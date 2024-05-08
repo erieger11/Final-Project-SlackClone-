@@ -2,36 +2,21 @@ import React, { useState, useRef } from 'react';
 import './Login.css';
 import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 
+
 const Login = () => {
   const [loginAction, setLoginAction] = useState('');
   const [registerAction, setRegisterAction] = useState('');
   let usernameRef = useRef(null);
   let passwordRef = useRef(null);
 
-  const registerLink = () => {
-    setRegisterAction(' active');
-    setLoginAction(' active');
-  };
-
-
   const loginLink = () => {
-    setLoginAction(' active');
-    setRegisterAction(' active');
     var username = usernameRef.current.value;
     var password = passwordRef.current.value;
 
-    console.log('Login clicked');
-   //set the login credintials
-
-
-//fix the reqeust
     fetch('http://localhost:8080/api/authenticate', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        username:'ethan',//usernameRef.current.value,
-        password:'ethan'//passwordRef.current.value
-      })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password })
     })
       .then((response) => {
         if (!response.ok) {
@@ -42,7 +27,15 @@ const Login = () => {
       .then((data) => {
         console.log(data);
 
-        window.location.href = '/thinAir';
+        if (data.token) {
+          // Store the token securely (e.g., in local storage)
+          localStorage.setItem('token', data.token);
+
+          // Redirect the user to a different page upon successful login
+          window.location.href = '/thinAir';
+        } else {
+          alert('Invalid username or password');
+        }
       })
       .catch((error) => {
         console.error('login problem', error);
@@ -50,16 +43,29 @@ const Login = () => {
       });
   };
 
+
+   const registerLink = () => {
+      setRegisterAction(' active');
+      setLoginAction(' active');
+    };
+
+
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     var username = usernameRef.current.value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    var phoneNumber = document.getElementById('phoneNumber').value;
     console.log('Registration submitted');
+
+
+//apr/admin/users
+
+
+
     // Handle registration form submission
     // ...
   };
-
   return (
     <div className={`wrapper${loginAction}`}>
       <div className="form-box login">
@@ -109,21 +115,11 @@ const Login = () => {
             <FaEnvelope className="icon" />
           </div>
           <div className="input-box">
-            <input type="password" placeholder="Password" required id="password" />
-            <input type="email" placeholder="Email" required />
-            <FaEnvelope className="icon" />
-          </div>
-          <div className="input-box">
             <input type="text" placeholder="Phone-Number" required />
             <FaPhoneSquare className="icon" />
           </div>
           <div className="input-box">
-            <input type="text" placeholder="Username" required />
-            <FaUser className="icon" />
-          </div>
-          <div className="input-box">
             <input type="password" placeholder="Password" required />
-
             <FaLock className="icon" />
           </div>
 
@@ -135,14 +131,14 @@ const Login = () => {
 
           <button type="submit">Register</button>
 
-          <div className="register-link">
-            <p>
-              Already have an account?{' '}
-              <a href="#" onClick={loginLink}>
-                Login
-              </a>
-            </p>
-          </div>
+{/*           <div className="register-link"> */}
+{/*             <p> */}
+{/*               Already have an account?{' '} */}
+{/*               <a href="#" onClick={loginLink}> */}
+{/*                 Login */}
+{/*               </a> */}
+{/*             </p> */}
+{/*           </div> */}
         </form>
       </div>
     </div>
