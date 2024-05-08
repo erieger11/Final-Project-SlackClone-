@@ -29,7 +29,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="sidebar">
+    <div className="sidebar">
       <h1>RubberMan 10.0</h1>
       <h2>Channels</h2>
       <ul>
@@ -50,7 +50,7 @@ const Sidebar = () => {
         />
         <button onClick={handleAddChannel}>+</button>
       </div>
-    </aside>
+    </div>
   );
 }
 
