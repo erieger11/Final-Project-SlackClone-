@@ -1,16 +1,11 @@
-/* Channel.css */
-.channels {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+.ui.menu .item {
+  color: rgb(180, 180, 185) !important;
 }
 
-.channel-name {
-  font-weight: bold;
-  color: #333;
+.clickable:hover {
+  cursor: pointer;
 }
 
-.channel-description {
-  color: #666;
+.ui.menu .item.active {
+  background: #1164a3 !important;
 }

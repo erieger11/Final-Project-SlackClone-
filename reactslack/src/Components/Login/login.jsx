@@ -8,30 +8,45 @@ const Login = () => {
     const [curUsername, setCurUsername] = useState('');
     const [curPassword, setCurPassword] = useState('');
 
+
+//ignore below
     const emailRef = useRef(null);
     const phoneNumberRef = useRef(null);
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
+//ignore above
+
+//     const handleLogin = (event) => {
+//       event.preventDefault();
+//       setCurUsername(event.target[0].value);
+//       setCurPassword(event.target[1].value);
+//       console.log(event.target[0].placeholder + ": " + event.target[0].value);
+//       console.log(event.target[1].placeholder + ": " + event.target[1].value);
+//
+//       loginLink(curUsername, curPassword);
+//     }
 
     const handleLogin = (event) => {
-      event.preventDefault();
-      setCurUsername(event.target[0].value);
-      setCurPassword(event.target[1].value);
-      console.log(event.target[0].placeholder + ": " + event.target[0].value);
-      console.log(event.target[1].placeholder + ": " + event.target[1].value);
-
-      loginLink(curUsername, curPassword);
+    event.preventDefault();
+    const username = event.target.elements.username.value;
+    const password = event.target.elements.password.value;
+    setCurUsername(username);
+    setCurPassword(password);
+    console.log(`Username: ${username}`);
+    console.log(`Password: ${password}`);
+    loginLink(username, password);
     }
 
-    const loginLink = (curUsername , curPassword) => {
+
+    const loginLink = (username , password) => {
         fetch('http://localhost:8080/api/authenticate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: curUsername,
-                password: curPassword
+                username: username,
+                password: password
             })
         })
         .then((response) => {
@@ -40,16 +55,18 @@ const Login = () => {
             }
             return response.json();
         })
-        .then((data) => {
-            console.log(data);
+       .then((data) => {
+               console.log(data);
 
-            if (data.token) {
-                localStorage.setItem('token', 'yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI2ODY1MywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzE1MTgyMjUzfQ._dnx-iLSZGzxXckBIg4ObfDeo-6lUgUeH_lkeT55PUanRwYaQfYCpc1bXHUYG8jaunGY4XbcJ0nj7rlNpX7Qkg'); // Set example token '112233' in localStorage
-                window.location.href = '/home'; // Redirect the user upon successful login
-            } else {
-                alert('Invalid username or password');
-            }
-        })
+               if (data.id_token) {
+                   localStorage.setItem('token', data.token);
+
+                   // Redirect the user upon successful login
+                   window.location.href = '/main';
+               } else {
+                   alert('Invalid username or password');
+               }
+           })
         .catch((error) => {
             console.error('Login problem:', error);
             alert('Failed to login. Please try again.');
@@ -117,13 +134,14 @@ const Login = () => {
                 <form action="" onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required/>
+                        <input type="text" placeholder="Username" name="username" required/>
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="password" placeholder="Password" required/>
+                        <input type="password" placeholder="Password" name="password" required/>
                         <FaLock className="icon" />
                     </div>
+
 
                     <div className="remember-forgot">
                         <label>
