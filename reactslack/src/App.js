@@ -8,12 +8,19 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-      {/* <Sidebar />
-      <channels /> */}
-      {/* <DirectMessage/> */}
-    </div>
+    <>
+      <Router>
+        <Rightsidebar />
+        <Sidebar />
+        <channels />
+        <Container>
+          <Routes>
+            <Route path="/" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/login" element={<Login />} /> {/* Login page as first screen*/}
+          </Routes>
+        </Container>
+      </Router>
+    </>
   );
 }
 
