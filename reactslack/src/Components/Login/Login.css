@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,10 +11,10 @@ body {
   align-items: center;
   min-height: 100vh;
   background: url('../../Components/Assets/background.jpg');
-} */
+}
 
 .wrapper {
-  position: relative;
+  position: center;
   width: 420px;
   height: 450px;
   background: transparent;
@@ -36,11 +36,13 @@ body {
 .wrapper .form-box {
   width: 100%;
   padding: 40px;
+  align-items: center;
 }
 
 .wrapper .form-box.login {
   transition: translate 0.18s ease;
   translate: 0;
+  align-items: center;
 }
 
 .wrapper.active .form-box.login {

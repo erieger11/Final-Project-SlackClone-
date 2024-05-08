@@ -5,7 +5,8 @@ import { Container } from 'reactstrap';
 import Rightsidebar from './Components/RightSidebar/RightSidebar';
 import Sidebar from './Components/Sidebar/sidebar';
 import SearchBar from './Components/SearchBar/Searchbar';
-import './App.css';
+import SearchBar from './Components/SearchBar/Searchbar.css';
+// import './App.css';
 
 function MainUI() {
   const handleSearch = term => {
