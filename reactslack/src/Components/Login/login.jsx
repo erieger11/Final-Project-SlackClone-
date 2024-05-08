@@ -15,10 +15,11 @@ const Login = () => {
 
     const handleLogin = (event) => {
       event.preventDefault();
-      console.log(event.target[0].placeholder + ": " + event.target[0].value);
-      console.log(event.target[1].placeholder + ": " + event.target[1].value);
       setCurUsername(event.target[0].value);
       setCurPassword(event.target[1].value);
+      console.log(event.target[0].placeholder + ": " + event.target[0].value);
+      console.log(event.target[1].placeholder + ": " + event.target[1].value);
+
       loginLink(curUsername, curPassword);
     }
 
@@ -43,7 +44,7 @@ const Login = () => {
             console.log(data);
 
             if (data.token) {
-                localStorage.setItem('token', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTIxODg2NSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzE1MTMyNDY1fQ.OeYfF_TQNlKFWJ-i2hvpZQDR38eQbVv_K_PQWSNGGF1s-9GcopxP6vDAaHV2fAz2Ofo8E-zHzA32ABkC2wzfeg'); // Set example token '112233' in localStorage
+                localStorage.setItem('token', 'yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI2ODY1MywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzE1MTgyMjUzfQ._dnx-iLSZGzxXckBIg4ObfDeo-6lUgUeH_lkeT55PUanRwYaQfYCpc1bXHUYG8jaunGY4XbcJ0nj7rlNpX7Qkg'); // Set example token '112233' in localStorage
                 window.location.href = '/home'; // Redirect the user upon successful login
             } else {
                 alert('Invalid username or password');
@@ -54,6 +55,9 @@ const Login = () => {
             alert('Failed to login. Please try again.');
         });
     };
+
+
+
 
 //register
     const registerLink = () => {
