@@ -1,0 +1,27 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+/* Optional styles for a search icon (replace with your icon library) */
+.search-bar svg {
+  margin-right: 0.5rem;
+  color: #aaa;
+}
