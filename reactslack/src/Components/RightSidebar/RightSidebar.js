@@ -50,7 +50,6 @@ function RightSidebar() {
         <li>Home</li>
         <li>Settings</li>
         <li>Online</li>
-
         <li>Offline</li>
       </ul>
     </div>
