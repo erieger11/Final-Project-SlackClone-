@@ -5,23 +5,33 @@ import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 const Login = () => {
     const [loginAction, setLoginAction] = useState('');
     const [registerAction, setRegisterAction] = useState('');
-    let usernameRef = useRef(null);
-    let passwordRef = useRef(null);
-    let emailRef = useRef(null);
-    let phoneNumberRef = useRef(null);
-    let firstNameRef = useRef(null);
-    let lastNameRef = useRef(null);
+    const [curUsername, setCurUsername] = useState('');
+    const [curPassword, setCurPassword] = useState('');
 
-    const loginLink = () => {
-        var username = usernameRef.current.value;
-        var password = passwordRef.current.value;
+    const emailRef = useRef(null);
+    const phoneNumberRef = useRef(null);
+    const firstNameRef = useRef(null);
+    const lastNameRef = useRef(null);
 
+    const handleLogin = (event) => {
+      event.preventDefault();
+      console.log(event.target[0].placeholder + ": " + event.target[0].value);
+      console.log(event.target[1].placeholder + ": " + event.target[1].value);
+      setCurUsername(event.target[0].value);
+      setCurPassword(event.target[1].value);
+      loginLink(curUsername, curPassword);
+    }
+
+    const loginLink = (curUsername , curPassword) => {
         fetch('http://localhost:8080/api/authenticate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username: username, password: password })
+            body: JSON.stringify({
+                username: curUsername,
+                password: curPassword
+            })
         })
         .then((response) => {
             if (!response.ok) {
@@ -34,7 +44,7 @@ const Login = () => {
 
             if (data.token) {
                 localStorage.setItem('token', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTIxODg2NSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzE1MTMyNDY1fQ.OeYfF_TQNlKFWJ-i2hvpZQDR38eQbVv_K_PQWSNGGF1s-9GcopxP6vDAaHV2fAz2Ofo8E-zHzA32ABkC2wzfeg'); // Set example token '112233' in localStorage
-                window.location.href = '/thinAir'; // Redirect the user upon successful login
+                window.location.href = '/home'; // Redirect the user upon successful login
             } else {
                 alert('Invalid username or password');
             }
@@ -45,11 +55,10 @@ const Login = () => {
         });
     };
 
+//register
     const registerLink = () => {
         setRegisterAction(' active');
         setLoginAction(' active');
-        var username = usernameRef.current.value;
-        var password = passwordRef.current.value;
         var email = emailRef.current.value;
         var phoneNumber = phoneNumberRef.current.value;
         var firstName = firstNameRef.current.value;
@@ -58,20 +67,17 @@ const Login = () => {
 
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
-        var username = usernameRef.current.value;
         var email = emailRef.current.value;
-        var password = passwordRef.current.value;
         var phoneNumber = phoneNumberRef.current.value;
         var firstName = firstNameRef.current.value;
         var lastName = lastNameRef.current.value;
-        console.log('Registration submitted');
 
         fetch('http://localhost:8080/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username: username, password: password,
+            body: JSON.stringify({ username: curUsername, password: curPassword,
                                     email: email, phoneNumber: phoneNumber,
                                      firstName: firstName, lastName: lastName})
         })
@@ -97,17 +103,21 @@ const Login = () => {
         });
     };
 
+
+
+
+
     return (
         <div className={`wrapper${loginAction}`}>
             <div className="form-box login">
-                <form action="">
+                <form action="" onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required ref={usernameRef} />
+                        <input type="text" placeholder="Username" required/>
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="password" placeholder="Password" required ref={passwordRef} />
+                        <input type="password" placeholder="Password" required/>
                         <FaLock className="icon" />
                     </div>
 
@@ -119,7 +129,7 @@ const Login = () => {
                         <a href="#">Forgot password?</a>
                     </div>
 
-                    <button type="button" onClick={loginLink}>
+                    <button type="submit">
                         Login
                     </button>
 
@@ -146,7 +156,7 @@ const Login = () => {
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required ref={usernameRef} />
+                        <input type="text" placeholder="Username" required />
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
@@ -158,7 +168,7 @@ const Login = () => {
                         <FaPhoneSquare className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="password" placeholder="Password" required ref={passwordRef} />
+                        <input type="password" placeholder="Password" required/>
                         <FaLock className="icon" />
                     </div>
                     <div className="remember-forgot">

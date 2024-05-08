@@ -16,6 +16,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} /> {/* Route for Home component */}
+            <Route path="/home" element={<Home />} /> {/* Route for Home component */}
             <Route path="/login" element={<Login />} /> {/* Login page as first screen*/}
           </Routes>
         </Container>
