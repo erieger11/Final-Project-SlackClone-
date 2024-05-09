@@ -31,11 +31,11 @@ import rocks.zipcode.web.rest.vm.LoginVM;
  * Controller to authenticate users.
  */
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class AuthenticateController {
 
     private final Logger log = LoggerFactory.getLogger(AuthenticateController.class);
-
     private final JwtEncoder jwtEncoder;
 
     @Value("${jhipster.security.authentication.jwt.token-validity-in-seconds:0}")
@@ -51,8 +51,9 @@ public class AuthenticateController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/authenticate")
-    public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
+    public ResponseEntity<JWTToken> authorize(@RequestBody LoginVM loginVM) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             loginVM.getUsername(),
             loginVM.getPassword()

@@ -72,7 +72,27 @@ public class AuthorityResource {
     }
 
     /**
-     * {@code GET  /authorities/:id} : get the "id" authority.
+     * {@code GET public class Student {
+     *    private Integer id;
+     *    private Double totalStudyTime;
+     *
+     *
+     *     public Student() {
+     *         this.totalStudyTime = 0.00;
+     *     }
+     *
+     *     public Student(Integer id) {
+     *         this.id = id;
+     *     }
+     *
+     *     public void learn(Double amountOfHours) {
+     *         this.totalStudyTime = amountOfHours ;
+     *     }
+     *
+     *     public Double getTotalStudyTime() {
+     *         return totalStudyTime;
+     *     }
+     * } /authorities/:id} : get the "id" authority.
      *
      * @param id the id of the authority to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the authority, or with status {@code 404 (Not Found)}.
