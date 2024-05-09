@@ -2,11 +2,14 @@ import React, { useState, useRef } from 'react';
 import './Login.css';
 import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 
+
 const Login = () => {
     const [loginAction, setLoginAction] = useState('');
     const [registerAction, setRegisterAction] = useState('');
     const [curUsername, setCurUsername] = useState('');
     const [curPassword, setCurPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
 //ignore below
@@ -59,7 +62,8 @@ const Login = () => {
                console.log(data);
 
                if (data.id_token) {
-                   localStorage.setItem('token', data.token);
+                   localStorage.setItem('token', data.id_token);
+                   setIsLoggedIn(true);
 
                    // Redirect the user upon successful login
                    window.location.href = '/main';
