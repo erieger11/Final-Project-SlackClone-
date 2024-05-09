@@ -2,6 +2,8 @@ import React from 'react';
 import Chat from '../Chat';
 import './MainComponent.css';
 
+
+
 const home = () => {
   return (
     <div className="home">
