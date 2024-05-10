@@ -72,7 +72,7 @@ const Sidebar = () => {
       </div>
 
       {/* Private Chats Section */}
-
+      
       <h2>Direct Messages</h2>
       <ul>
         {/* Render list of private chats */}
