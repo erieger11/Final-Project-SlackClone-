@@ -20,8 +20,8 @@
       "id": "ID",
       "userName": "User Name",
       "body": "Body",
-      "userProfile": "User Profile",
-      "message": "Message"
+      "message": "Message",
+      "userProfile": "User Profile"
     }
   }
 }

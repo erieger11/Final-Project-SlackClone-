@@ -34,17 +34,17 @@ public class Message implements Serializable {
     private Integer timestamp;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "userProfile", "messages" }, allowSetters = true)
-    private Mention mentions;
+    @JsonIgnoreProperties(value = { "workspace", "messages", "members" }, allowSetters = true)
+    private Channel channel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "user", "messages", "mentions", "workspaces", "channels" }, allowSetters = true)
     private UserProfile userProfile;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "messages")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "message")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "workspace", "messages", "members" }, allowSetters = true)
-    private Set<Channel> channels = new HashSet<>();
+    @JsonIgnoreProperties(value = { "message", "userProfile" }, allowSetters = true)
+    private Set<Mention> mentions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -100,16 +100,16 @@ public class Message implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public Mention getMentions() {
-        return this.mentions;
+    public Channel getChannel() {
+        return this.channel;
     }
 
-    public void setMentions(Mention mention) {
-        this.mentions = mention;
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 
-    public Message mentions(Mention mention) {
-        this.setMentions(mention);
+    public Message channel(Channel channel) {
+        this.setChannel(channel);
         return this;
     }
 
@@ -126,34 +126,34 @@ public class Message implements Serializable {
         return this;
     }
 
-    public Set<Channel> getChannels() {
-        return this.channels;
+    public Set<Mention> getMentions() {
+        return this.mentions;
     }
 
-    public void setChannels(Set<Channel> channels) {
-        if (this.channels != null) {
-            this.channels.forEach(i -> i.setMessages(null));
+    public void setMentions(Set<Mention> mentions) {
+        if (this.mentions != null) {
+            this.mentions.forEach(i -> i.setMessage(null));
         }
-        if (channels != null) {
-            channels.forEach(i -> i.setMessages(this));
+        if (mentions != null) {
+            mentions.forEach(i -> i.setMessage(this));
         }
-        this.channels = channels;
+        this.mentions = mentions;
     }
 
-    public Message channels(Set<Channel> channels) {
-        this.setChannels(channels);
+    public Message mentions(Set<Mention> mentions) {
+        this.setMentions(mentions);
         return this;
     }
 
-    public Message addChannel(Channel channel) {
-        this.channels.add(channel);
-        channel.setMessages(this);
+    public Message addMentions(Mention mention) {
+        this.mentions.add(mention);
+        mention.setMessage(this);
         return this;
     }
 
-    public Message removeChannel(Channel channel) {
-        this.channels.remove(channel);
-        channel.setMessages(null);
+    public Message removeMentions(Mention mention) {
+        this.mentions.remove(mention);
+        mention.setMessage(null);
         return this;
     }
 

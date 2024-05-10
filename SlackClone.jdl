@@ -26,6 +26,8 @@ entity Mention {
   body String required
 }
 
+
+
 relationship OneToOne {
      UserProfile{user(login)} to User{userProfile} with builtInEntity
 }
@@ -47,12 +49,12 @@ relationship ManyToMany {
 
 // Many-to-One relationship between Message and Channel for channel
 relationship ManyToOne {
-  Channel{messages} to Message{channel}
+   Message{channel} to Channel{messages}
 }
 
 // Many-to-One relationship between Mention and Message
 relationship ManyToOne {
-  Message{mentions} to Mention{message}
+   Mention{message} to Message{mentions}
 }
 
 // Many-to-One relationship between Message and UserProfile for userProfile
@@ -60,3 +62,4 @@ relationship OneToMany {
 UserProfile{messages} to Message{userProfile},
 UserProfile{mention} to Mention{userProfile}
 }
+

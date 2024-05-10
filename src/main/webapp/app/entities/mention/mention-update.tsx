@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IMessage } from 'app/shared/model/message.model';
+import { getEntities as getMessages } from 'app/entities/message/message.reducer';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IMention } from 'app/shared/model/mention.model';
@@ -21,6 +23,7 @@ export const MentionUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const messages = useAppSelector(state => state.message.entities);
   const userProfiles = useAppSelector(state => state.userProfile.entities);
   const mentionEntity = useAppSelector(state => state.mention.entity);
   const loading = useAppSelector(state => state.mention.loading);
@@ -38,6 +41,7 @@ export const MentionUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getMessages({}));
     dispatch(getUserProfiles({}));
   }, []);
 
@@ -56,6 +60,7 @@ export const MentionUpdate = () => {
     const entity = {
       ...mentionEntity,
       ...values,
+      message: messages.find(it => it.id.toString() === values.message?.toString()),
       userProfile: userProfiles.find(it => it.id.toString() === values.userProfile?.toString()),
     };
 
@@ -71,6 +76,7 @@ export const MentionUpdate = () => {
       ? {}
       : {
           ...mentionEntity,
+          message: mentionEntity?.message?.id,
           userProfile: mentionEntity?.userProfile?.id,
         };
 
@@ -119,6 +125,22 @@ export const MentionUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
+              <ValidatedField
+                id="mention-message"
+                name="message"
+                data-cy="message"
+                label={translate('slackCloneTempApp.mention.message')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {messages
+                  ? messages.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
                 id="mention-userProfile"
                 name="userProfile"

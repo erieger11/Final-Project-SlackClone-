@@ -18,18 +18,18 @@
   "name": "Mention",
   "relationships": [
     {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "mentions",
+      "relationshipName": "message",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityName": "userProfile",
       "otherEntityRelationshipName": "mention",
       "relationshipName": "userProfile",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "message",
-      "otherEntityRelationshipName": "mentions",
-      "relationshipName": "message",
-      "relationshipSide": "right",
-      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no"
