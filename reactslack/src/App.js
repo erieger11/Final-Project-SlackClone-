@@ -5,30 +5,23 @@ import Home from './Components/Home/Home'; // Import your Home component
 import { Container } from 'reactstrap';
 import ConditionalApp from './ConditionalApp'; // Import ConditionalApp
 import Rightsidebar from './Components/RightSidebar/RightSidebar';
-import Sidebar from './Components/Sidebar/sidebar';
+import Sidebar from './Components/Sidebar/Sidebar';
 import MainComponent from './Components/MainComponent/MainComponent';
 
 function App() {
   return (
-    <UserProvider>
-      {' '}
-      {/* Wrap entire app with UserProvider */}
-      <Router>
-        <ConditionalApp>
-          {' '}
-          {/* Wrap sidebars and main content with ConditionalApp */}
-          <Rightsidebar />
-          <Sidebar />
-          <Container>
-            <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/" element={<Login />} />
-              <Route path="/main" element={<MainComponent />} />
-            </Routes>
-          </Container>
-        </ConditionalApp>
-      </Router>
-    </UserProvider>
+    <Router>
+      <Rightsidebar />
+      <Sidebar />
+      <channels />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/main" element={<MainComponent />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 
