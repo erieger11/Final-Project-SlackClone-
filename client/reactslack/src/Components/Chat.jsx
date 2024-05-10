@@ -1,6 +1,7 @@
 import React from "react";
 import { FaHeadset, FaUserPlus } from "react-icons/fa";
 import Messages from "./Messages";
+import Sidebar from "./Sidebar/sidebar";
 
 const Chat = () => {
   return (
@@ -13,6 +14,7 @@ const Chat = () => {
         </div>
       </div>
       <Messages />
+      
     
     </div>
   );

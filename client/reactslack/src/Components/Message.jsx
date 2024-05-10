@@ -90,6 +90,7 @@ const Message = () => {
           <p>{message}</p>
         </div>
       </div>
+      <div className='input'>
       <input
         placeholder="Room Number..."
         onChange={event => {
@@ -97,13 +98,14 @@ const Message = () => {
         }}
       />
       <button onClick={joinRoom}>Join Room</button>
-      <input
-        placeholder="Message..."
+      <input type='text' placeholder="Type something"
         onChange={event => {
           setMessage(event.target.value);
         }}
       />
-      <button onClick={sendMessage}>Send Message</button>
+      <div className='send'>
+      <button onClick={sendMessage}>Send Message</button></div>
+      </div>
     </>
   );
 };
