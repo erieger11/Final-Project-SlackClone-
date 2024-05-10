@@ -77,8 +77,12 @@ const Login = () => {
         });
     };
 
+    const logLink = () => {
+        setLoginAction("");
+      };
+    
 
-
+       
 
 //register
     const registerLink = () => {
@@ -204,6 +208,14 @@ const Login = () => {
                     </div>
 
                     <button type="submit">Register</button>
+                    <div className="register-link">
+                        <p>
+                            Already have an account?{' '}
+                            <a href="#" onClick={logLink}>
+                                Login
+                            </a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
