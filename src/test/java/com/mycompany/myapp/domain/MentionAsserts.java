@@ -60,6 +60,7 @@ public class MentionAsserts {
     public static void assertMentionUpdatableRelationshipsEquals(Mention expected, Mention actual) {
         assertThat(expected)
             .as("Verify Mention relationships")
+            .satisfies(e -> assertThat(e.getMessage()).as("check message").isEqualTo(actual.getMessage()))
             .satisfies(e -> assertThat(e.getUserProfile()).as("check userProfile").isEqualTo(actual.getUserProfile()));
     }
 }
