@@ -6,8 +6,9 @@ import RightSidebar from "./RightSidebar/RightSidebar";
 const Messages = () => {
   return (
     <div className="messages">
+      
       <Message />
-      <RightSidebar/>
+      
     </div>
   );
 };
