@@ -1,0 +1,25 @@
+/* Channels.css */
+
+/* Style for the delete button */
+.ui.menu .item .button {
+  margin-left: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.ui.menu .item .button:hover {
+  background-color: #c82333;
+}
+
+/* Style for the add button */
+.ui.menu .item .clickable {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.ui.menu .item .clickable:hover {
+  text-decoration: underline;
+}

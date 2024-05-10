@@ -50,6 +50,20 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.UserProfile.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UserProfile.class.getName() + ".messages");
+            createCache(cm, com.mycompany.myapp.domain.UserProfile.class.getName() + ".mentions");
+            createCache(cm, com.mycompany.myapp.domain.UserProfile.class.getName() + ".workspaces");
+            createCache(cm, com.mycompany.myapp.domain.UserProfile.class.getName() + ".channels");
+            createCache(cm, com.mycompany.myapp.domain.Channel.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Channel.class.getName() + ".members");
+            createCache(cm, com.mycompany.myapp.domain.Workspace.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Workspace.class.getName() + ".channels");
+            createCache(cm, com.mycompany.myapp.domain.Workspace.class.getName() + ".members");
+            createCache(cm, com.mycompany.myapp.domain.Message.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Message.class.getName() + ".channels");
+            createCache(cm, com.mycompany.myapp.domain.Mention.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Mention.class.getName() + ".messages");
             // jhipster-needle-ehcache-add-entry
         };
     }

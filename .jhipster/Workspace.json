@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20240510184017"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Workspace",
+  "relationships": [
+    {
+      "otherEntityName": "channel",
+      "otherEntityRelationshipName": "workspace",
+      "relationshipName": "channels",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "workspaces",
+      "relationshipName": "members",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
