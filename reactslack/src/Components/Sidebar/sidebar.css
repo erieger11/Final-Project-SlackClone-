@@ -5,26 +5,26 @@
     color: #fff;
     padding: 20px;
   }
-  
+
   .sidebar h2 {
     margin-bottom: 20px;
     font-size: 1.2rem;
   }
-  
+
   .sidebar ul {
     list-style: none;
     padding: 0;
   }
-  
+
   .sidebar li {
     margin-bottom: 10px;
   }
-  
+
   .sidebar li a {
     color: #fff;
     text-decoration: none;
   }
-  
+
   .sidebar li a:hover {
     text-decoration: underline;
   }
@@ -40,26 +40,26 @@
     color: #fff;
     padding: 20px;
   }
-  
+
   .sidebar h2 {
     margin-bottom: 20px;
     font-size: 1.2rem;
   }
-  
+
   .sidebar ul {
     list-style: none;
     padding: 0;
   }
-  
+
   .sidebar li {
     margin-bottom: 10px;
   }
-  
+
   .sidebar li a {
     color: #fff;
     text-decoration: none;
   }
-  
+
   .sidebar li a:hover {
     text-decoration: underline;
   }
