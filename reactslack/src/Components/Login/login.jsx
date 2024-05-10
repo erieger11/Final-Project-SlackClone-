@@ -2,29 +2,19 @@ import React, { useState, useRef } from 'react';
 import './Login.css';
 import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 
+//const username;
+
 const Login = () => {
     const [loginAction, setLoginAction] = useState('');
     const [registerAction, setRegisterAction] = useState('');
-    const [curUsername, setCurUsername] = useState('');
+    const [username, setCurUsername] = useState('');
     const [curPassword, setCurPassword] = useState('');
 
-
-//ignore below
-    const emailRef = useRef(null);
-    const phoneNumberRef = useRef(null);
-    const firstNameRef = useRef(null);
-    const lastNameRef = useRef(null);
-//ignore above
-
-//     const handleLogin = (event) => {
-//       event.preventDefault();
-//       setCurUsername(event.target[0].value);
-//       setCurPassword(event.target[1].value);
-//       console.log(event.target[0].placeholder + ": " + event.target[0].value);
-//       console.log(event.target[1].placeholder + ": " + event.target[1].value);
-//
-//       loginLink(curUsername, curPassword);
-//     }
+    const [registerUserName, setRegisterUsername] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [registerFirstName, setRegisterFirstName] = useState('');
+    const [registerLastName, setRegisterLastname] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
 
     const handleLogin = (event) => {
     event.preventDefault();
@@ -35,7 +25,9 @@ const Login = () => {
     console.log(`Username: ${username}`);
     console.log(`Password: ${password}`);
     loginLink(username, password);
+    //save username to
     }
+
 
 
     const loginLink = (username , password) => {
@@ -60,8 +52,7 @@ const Login = () => {
 
                if (data.id_token) {
                    localStorage.setItem('token', data.token);
-
-                   // Redirect the user upon successful login
+                   //get user account then profile
                    window.location.href = '/main';
                } else {
                    alert('Invalid username or password');
@@ -73,60 +64,67 @@ const Login = () => {
         });
     };
 
-
-
-
 //register
-    const registerLink = () => {
-        setRegisterAction(' active');
-        setLoginAction(' active');
-        var email = emailRef.current.value;
-        var phoneNumber = phoneNumberRef.current.value;
-        var firstName = firstNameRef.current.value;
-        var lastName = lastNameRef.current.value;
-    };
+   const handleSubmit = (event) => {
+       event.preventDefault();
+       setRegisterAction(' active');
+       setLoginAction(' active');
+       const registerUserName = event.target.elements.regUsername.value;
+       const registerPassword = event.target.elements.regPassword.value;
+       const registerFirstName = event.target.elements.regFirstName.value;
+       const registerLastName = event.target.elements.regLastName.value;
+       const registerEmail = event.target.elements.regEmail.value;
 
-    const handleRegisterSubmit = (e) => {
-        e.preventDefault();
-        var email = emailRef.current.value;
-        var phoneNumber = phoneNumberRef.current.value;
-        var firstName = firstNameRef.current.value;
-        var lastName = lastNameRef.current.value;
+       setRegisterUsername(registerUserName);
+       setRegisterPassword(registerPassword);
+       setRegisterFirstName(registerFirstName);
+       setRegisterLastname(registerLastName);
+       setRegisterEmail(registerEmail);
 
-        fetch('http://localhost:8080/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: curUsername, password: curPassword,
-                                    email: email, phoneNumber: phoneNumber,
-                                     firstName: firstName, lastName: lastName})
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
+       console.log(`Username: ${registerUserName}`);
+       console.log(`Password: ${registerPassword}`);
+       console.log(`First Name: ${registerFirstName}`);
+       console.log(`Last Name: ${registerLastName}`);
+       console.log(`Email: ${registerEmail}`);
 
-            if (data.token) {
-                localStorage.setItem('token', 'eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTIxODg2NSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzE1MTMyNDY1fQ.OeYfF_TQNlKFWJ-i2hvpZQDR38eQbVv_K_PQWSNGGF1s-9GcopxP6vDAaHV2fAz2Ofo8E-zHzA32ABkC2wzfeg');
-                window.location.href = '/thinAir'; // Redirect the user upon successful registration
-            } else {
-                alert('Failed to create account. Please try again.');
-            }
-        })
-        .catch((error) => {
-            console.error('Registration problem:', error);
-            alert('Failed to create account. Please try again.');
-        });
-    };
+       registerLink(registerUserName, registerPassword, registerFirstName, registerLastName, registerEmail);
+   }
 
+   const registerLink = (registerUserName, registerPassword, registerFirstName, registerLastName, registerEmail) => {
+       fetch('http://localhost:8080/api/register', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+               registerUserName: registerUserName,
+               registerPassword: registerPassword,
+               registerEmail: registerEmail,
+               registerFirstName: registerFirstName,
+               registerLastName: registerLastName
+           })
+       })
+       .then((response) => {
+           if (!response.ok) {
+               throw new Error('Network response was not ok');
+           }
+           return response.json();
+       })
+       .then((data) => {
+           console.log(data);
 
-
-
+           if (data.token) {
+               localStorage.setItem('token', data.token);
+               window.location.href = '/main';
+           } else {
+               alert('Failed to create account. Please try again.');
+           }
+       })
+       .catch((error) => {
+           console.error('Registration problem:', error);
+           alert('Failed to create account. Please try again.');
+       });
+   };
 
     return (
         <div className={`wrapper${loginAction}`}>
@@ -141,8 +139,6 @@ const Login = () => {
                         <input type="password" placeholder="Password" name="password" required/>
                         <FaLock className="icon" />
                     </div>
-
-
                     <div className="remember-forgot">
                         <label>
                             <input type="checkbox" />
@@ -158,7 +154,7 @@ const Login = () => {
                     <div className="register-link">
                         <p>
                             Don't have an account?{' '}
-                            <a href="#" onClick={registerLink}>
+                            <a href="#" onClick={(e) => { e.preventDefault(); handleSubmit(e); }}>
                                 Register
                             </a>
                         </p>
@@ -167,30 +163,26 @@ const Login = () => {
             </div>
 
             <div className={`form-box register${registerAction}`}>
-                <form onSubmit={handleRegisterSubmit}>
+                <form onSubmit={handleSubmit}>
                     <h1>Registration</h1>
                     <div className="input-box">
-                        <input type="text" placeholder="First Name" required ref={firstNameRef} />
+                        <input type="text" placeholder="First Name" name="regFirstName" required />
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Last Name" required ref={lastNameRef} />
+                        <input type="text" placeholder="Last Name" name="regLastName" required/>
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Username" required />
+                        <input type="text" placeholder="Username" name="regUsername" required/>
                         <FaUser className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="email" placeholder="Email" required ref={emailRef} id="email" />
+                        <input type="email" placeholder="Email" name="regEmail" required />
                         <FaEnvelope className="icon" />
                     </div>
                     <div className="input-box">
-                        <input type="text" placeholder="Phone-Number" required ref={phoneNumberRef} />
-                        <FaPhoneSquare className="icon" />
-                    </div>
-                    <div className="input-box">
-                        <input type="password" placeholder="Password" required/>
+                        <input type="password" placeholder="Password" name="regPassword" required/>
                         <FaLock className="icon" />
                     </div>
                     <div className="remember-forgot">

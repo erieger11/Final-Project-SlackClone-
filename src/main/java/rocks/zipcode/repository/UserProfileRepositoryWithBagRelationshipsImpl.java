@@ -36,6 +36,11 @@ public class UserProfileRepositoryWithBagRelationshipsImpl implements UserProfil
         );
     }
 
+    //    @Override
+    //    public Optional<UserProfile> findByEmail(String email) {
+    //        return Optional.empty();
+    //    }
+
     @Override
     public List<UserProfile> fetchBagRelationships(List<UserProfile> userProfiles) {
         return Optional.of(userProfiles).map(this::fetchWorkspaces).map(this::fetchChannels).orElse(Collections.emptyList());
