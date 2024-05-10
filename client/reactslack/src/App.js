@@ -3,14 +3,12 @@ import Login from './Components/Login/login';
 import Home from './Components/Home/Home'; // Import your Home component
 import { Container } from 'reactstrap';
 import Rightsidebar from './Components/RightSidebar/RightSidebar';
-import Sidebar from './Components/Sidebar/Sidebar';
+import Sidebar from './Components/Sidebar/sidebar';
 import MainComponent from './Components/MainComponent/MainComponent';
 // import './App.css';
 function App() {
   return (
     <Router>
-      <Rightsidebar />
-      <Sidebar />
       <channels />
       <Container>
         <Routes>

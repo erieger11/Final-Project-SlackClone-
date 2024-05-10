@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import React, { useEffect, useState } from 'react';
 import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
 
-const socket = io.connect('http://localhost:8080');
+const socket = io.connect('http://localhost:9000');
 
 const Message = () => {
   const [messageText, setMessageText] = useState('');
@@ -70,7 +70,7 @@ const Message = () => {
     };
   }, [messageReceived]);
   return (
-    <>
+    <div>
       <div className="message ">
         <div className="messageInfo">
           <img src={Jane} alt="" />
@@ -103,10 +103,10 @@ const Message = () => {
           setMessage(event.target.value);
         }}
       />
-      <div className='send'>
+      
       <button onClick={sendMessage}>Send Message</button></div>
       </div>
-    </>
+   
   );
 };
 
