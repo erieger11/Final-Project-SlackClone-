@@ -14,8 +14,6 @@ const Chat = () => {
         </div>
       </div>
       <Messages />
-      
-    
     </div>
   );
 };

@@ -3,18 +3,13 @@ import profile from './Assets/profile.jpg';
 import io from 'socket.io-client';
 import React, { useEffect, useState } from 'react';
 import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
-
 const socket = io.connect('http://localhost:9000');
-
 const Message = () => {
   const [messageText, setMessageText] = useState('');
-
   const handleSubmit = async e => {
     e.preventDefault();
-
     const storedJWT = localStorage.getItem('token');
     console.log('------->TOKEN ', storedJWT);
-
     try {
       const response = await fetch('http://localhost:8080/api/messages', {
         method: 'POST',
@@ -24,7 +19,6 @@ const Message = () => {
         },
         body: JSON.stringify({ uploads: messageText }),
       });
-
       if (!response.ok) {
         throw new Error('Error sending message');
       }
@@ -34,9 +28,7 @@ const Message = () => {
       // Handle the error (display a message to the user)
     }
   };
-
   const [room, setRoom] = useState('');
-
   // Messages States
   const [message, setMessage] = useState('');
   const [messageReceived, setMessageReceived] = useState('');
@@ -48,7 +40,6 @@ const Message = () => {
       alert('Please enter a room number.');
     }
   };
-
   const sendMessage = () => {
     if (message.trim() !== '') {
       // Trim the message to remove leading and trailing spaces
@@ -57,14 +48,11 @@ const Message = () => {
       alert('Please enter a message.');
     }
   };
-
   useEffect(() => {
     const handleReceiveMessage = data => {
       setMessageReceived(data.message);
     };
-
     socket.on('receive_message', handleReceiveMessage);
-
     return () => {
       socket.off('receive_message', handleReceiveMessage);
     };
@@ -80,7 +68,6 @@ const Message = () => {
           <p>{messageReceived}</p>
         </div>
       </div>
-
       <div className="message owner">
         <div className="messageInfo">
           <img src={Jane} alt="" />
@@ -103,12 +90,8 @@ const Message = () => {
           setMessage(event.target.value);
         }}
       />
-      
       <button onClick={sendMessage}>Send Message</button></div>
       </div>
-   
-   
   );
 };
-
 export default Message;
