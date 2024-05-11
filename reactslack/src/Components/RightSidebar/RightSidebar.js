@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { RightsidebarData } from './RightSidebarData';
-import './RightSidebar.css';
 import Settings from '../Settings/settings';
 import OnlineUsers from '../ActiveUsers/OnlineUsers.js';
 import OfflineUsers from '../ActiveUsers/OfflineUsers.js';
+import './RightSidebar.css'; // Assuming the CSS file remains the same
 
-function RightSidebar() {
-  const [activeTab, setActiveTab] = useState(''); // Initial active tab
+const RightSidebar = () => {
+  // State for the active tab
+  const [activeTab, setActiveTab] = useState('');
 
   const handleTabChange = tabName => {
     setActiveTab(tabName);
@@ -43,6 +42,6 @@ function RightSidebar() {
       {renderContent()}
     </div>
   );
-}
+};
 
 export default RightSidebar;
