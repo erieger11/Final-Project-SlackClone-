@@ -101,7 +101,7 @@ export const Message = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('timestamp')} />
                 </th>
                 <th>
-                  <Translate contentKey="slackCloneTempApp.message.mentions">Mentions</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="slackCloneTempApp.message.channel">Channel</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="slackCloneTempApp.message.userProfile">User Profile</Translate> <FontAwesomeIcon icon="sort" />
@@ -120,7 +120,7 @@ export const Message = () => {
                   <td>{message.uploads}</td>
                   <td>{message.pinned}</td>
                   <td>{message.timestamp}</td>
-                  <td>{message.mentions ? <Link to={`/mention/${message.mentions.id}`}>{message.mentions.id}</Link> : ''}</td>
+                  <td>{message.channel ? <Link to={`/channel/${message.channel.id}`}>{message.channel.id}</Link> : ''}</td>
                   <td>{message.userProfile ? <Link to={`/user-profile/${message.userProfile.id}`}>{message.userProfile.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

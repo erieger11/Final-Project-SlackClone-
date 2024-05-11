@@ -36,18 +36,18 @@ public class UserProfile implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userProfile")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "mentions", "userProfile", "channels" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "channel", "userProfile", "mentions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userProfile")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "userProfile", "messages" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "message", "userProfile" }, allowSetters = true)
     private Set<Mention> mentions = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)

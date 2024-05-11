@@ -64,6 +64,8 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Message.class.getName() + ".channels");
             createCache(cm, com.mycompany.myapp.domain.Mention.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Mention.class.getName() + ".messages");
+            createCache(cm, com.mycompany.myapp.domain.Channel.class.getName() + ".messages");
+            createCache(cm, com.mycompany.myapp.domain.Message.class.getName() + ".mentions");
             // jhipster-needle-ehcache-add-entry
         };
     }

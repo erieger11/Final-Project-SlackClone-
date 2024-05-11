@@ -9,6 +9,7 @@ const home = () => {
     <div className="home">
       <div className="container">
         <Chat />
+        
       </div>
     </div>
   );

@@ -9,8 +9,6 @@ import MainComponent from './Components/MainComponent/MainComponent';
 function App() {
   return (
     <Router>
-      <Rightsidebar />
-      <Sidebar />
       <channels />
       <Container>
         <Routes>

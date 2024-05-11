@@ -50,9 +50,9 @@ export const MessageDetail = () => {
           </dt>
           <dd>{messageEntity.timestamp}</dd>
           <dt>
-            <Translate contentKey="slackCloneTempApp.message.mentions">Mentions</Translate>
+            <Translate contentKey="slackCloneTempApp.message.channel">Channel</Translate>
           </dt>
-          <dd>{messageEntity.mentions ? messageEntity.mentions.id : ''}</dd>
+          <dd>{messageEntity.channel ? messageEntity.channel.id : ''}</dd>
           <dt>
             <Translate contentKey="slackCloneTempApp.message.userProfile">User Profile</Translate>
           </dt>
