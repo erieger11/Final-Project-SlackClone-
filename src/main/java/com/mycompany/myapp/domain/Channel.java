@@ -36,9 +36,10 @@ public class Channel implements Serializable {
     @JsonIgnoreProperties(value = { "channels", "members" }, allowSetters = true)
     private Workspace workspace;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "mentions", "userProfile", "channels" }, allowSetters = true)
-    private Message messages;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "channel")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "channel", "userProfile", "mentions" }, allowSetters = true)
+    private Set<Message> messages = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "channels")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -99,16 +100,34 @@ public class Channel implements Serializable {
         return this;
     }
 
-    public Message getMessages() {
+    public Set<Message> getMessages() {
         return this.messages;
     }
 
-    public void setMessages(Message message) {
-        this.messages = message;
+    public void setMessages(Set<Message> messages) {
+        if (this.messages != null) {
+            this.messages.forEach(i -> i.setChannel(null));
+        }
+        if (messages != null) {
+            messages.forEach(i -> i.setChannel(this));
+        }
+        this.messages = messages;
     }
 
-    public Channel messages(Message message) {
-        this.setMessages(message);
+    public Channel messages(Set<Message> messages) {
+        this.setMessages(messages);
+        return this;
+    }
+
+    public Channel addMessages(Message message) {
+        this.messages.add(message);
+        message.setChannel(this);
+        return this;
+    }
+
+    public Channel removeMessages(Message message) {
+        this.messages.remove(message);
+        message.setChannel(null);
         return this;
     }
 

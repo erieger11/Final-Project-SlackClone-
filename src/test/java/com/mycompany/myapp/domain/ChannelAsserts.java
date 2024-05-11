@@ -61,7 +61,6 @@ public class ChannelAsserts {
         assertThat(expected)
             .as("Verify Channel relationships")
             .satisfies(e -> assertThat(e.getWorkspace()).as("check workspace").isEqualTo(actual.getWorkspace()))
-            .satisfies(e -> assertThat(e.getMessages()).as("check messages").isEqualTo(actual.getMessages()))
             .satisfies(e -> assertThat(e.getMembers()).as("check members").isEqualTo(actual.getMembers()));
     }
 }

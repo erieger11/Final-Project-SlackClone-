@@ -1,5 +1,4 @@
 import { IWorkspace } from 'app/shared/model/workspace.model';
-import { IMessage } from 'app/shared/model/message.model';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 
 export interface IChannel {
@@ -7,7 +6,6 @@ export interface IChannel {
   name?: string;
   description?: string | null;
   workspace?: IWorkspace | null;
-  messages?: IMessage | null;
   members?: IUserProfile[] | null;
 }
 
