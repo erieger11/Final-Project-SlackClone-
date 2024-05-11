@@ -27,8 +27,8 @@
       "otherEntityName": "message",
       "otherEntityRelationshipName": "channel",
       "relationshipName": "messages",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "userProfile",

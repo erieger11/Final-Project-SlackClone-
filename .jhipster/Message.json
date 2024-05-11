@@ -20,9 +20,9 @@
   "name": "Message",
   "relationships": [
     {
-      "otherEntityName": "mention",
-      "otherEntityRelationshipName": "message",
-      "relationshipName": "mentions",
+      "otherEntityName": "channel",
+      "otherEntityRelationshipName": "messages",
+      "relationshipName": "channel",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
@@ -34,9 +34,9 @@
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "channel",
-      "otherEntityRelationshipName": "messages",
-      "relationshipName": "channel",
+      "otherEntityName": "mention",
+      "otherEntityRelationshipName": "message",
+      "relationshipName": "mentions",
       "relationshipSide": "right",
       "relationshipType": "one-to-many"
     }

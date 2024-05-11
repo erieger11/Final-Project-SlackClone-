@@ -8,8 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IMention } from 'app/shared/model/mention.model';
-import { getEntities as getMentions } from 'app/entities/mention/mention.reducer';
+import { IChannel } from 'app/shared/model/channel.model';
+import { getEntities as getChannels } from 'app/entities/channel/channel.reducer';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IMessage } from 'app/shared/model/message.model';
@@ -23,7 +23,7 @@ export const MessageUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const mentions = useAppSelector(state => state.mention.entities);
+  const channels = useAppSelector(state => state.channel.entities);
   const userProfiles = useAppSelector(state => state.userProfile.entities);
   const messageEntity = useAppSelector(state => state.message.entity);
   const loading = useAppSelector(state => state.message.loading);
@@ -41,7 +41,7 @@ export const MessageUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getMentions({}));
+    dispatch(getChannels({}));
     dispatch(getUserProfiles({}));
   }, []);
 
@@ -66,7 +66,7 @@ export const MessageUpdate = () => {
     const entity = {
       ...messageEntity,
       ...values,
-      mentions: mentions.find(it => it.id.toString() === values.mentions?.toString()),
+      channel: channels.find(it => it.id.toString() === values.channel?.toString()),
       userProfile: userProfiles.find(it => it.id.toString() === values.userProfile?.toString()),
     };
 
@@ -82,7 +82,7 @@ export const MessageUpdate = () => {
       ? {}
       : {
           ...messageEntity,
-          mentions: messageEntity?.mentions?.id,
+          channel: messageEntity?.channel?.id,
           userProfile: messageEntity?.userProfile?.id,
         };
 
@@ -133,15 +133,15 @@ export const MessageUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="message-mentions"
-                name="mentions"
-                data-cy="mentions"
-                label={translate('slackCloneTempApp.message.mentions')}
+                id="message-channel"
+                name="channel"
+                data-cy="channel"
+                label={translate('slackCloneTempApp.message.channel')}
                 type="select"
               >
                 <option value="" key="0" />
-                {mentions
-                  ? mentions.map(otherEntity => (
+                {channels
+                  ? channels.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

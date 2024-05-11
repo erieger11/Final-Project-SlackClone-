@@ -44,6 +44,10 @@ export const MentionDetail = () => {
           </dt>
           <dd>{mentionEntity.body}</dd>
           <dt>
+            <Translate contentKey="slackCloneTempApp.mention.message">Message</Translate>
+          </dt>
+          <dd>{mentionEntity.message ? mentionEntity.message.id : ''}</dd>
+          <dt>
             <Translate contentKey="slackCloneTempApp.mention.userProfile">User Profile</Translate>
           </dt>
           <dd>{mentionEntity.userProfile ? mentionEntity.userProfile.id : ''}</dd>

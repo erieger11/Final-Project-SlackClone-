@@ -10,8 +10,6 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IWorkspace } from 'app/shared/model/workspace.model';
 import { getEntities as getWorkspaces } from 'app/entities/workspace/workspace.reducer';
-import { IMessage } from 'app/shared/model/message.model';
-import { getEntities as getMessages } from 'app/entities/message/message.reducer';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IChannel } from 'app/shared/model/channel.model';
@@ -26,7 +24,6 @@ export const ChannelUpdate = () => {
   const isNew = id === undefined;
 
   const workspaces = useAppSelector(state => state.workspace.entities);
-  const messages = useAppSelector(state => state.message.entities);
   const userProfiles = useAppSelector(state => state.userProfile.entities);
   const channelEntity = useAppSelector(state => state.channel.entity);
   const loading = useAppSelector(state => state.channel.loading);
@@ -45,7 +42,6 @@ export const ChannelUpdate = () => {
     }
 
     dispatch(getWorkspaces({}));
-    dispatch(getMessages({}));
     dispatch(getUserProfiles({}));
   }, []);
 
@@ -65,7 +61,6 @@ export const ChannelUpdate = () => {
       ...channelEntity,
       ...values,
       workspace: workspaces.find(it => it.id.toString() === values.workspace?.toString()),
-      messages: messages.find(it => it.id.toString() === values.messages?.toString()),
       members: mapIdList(values.members),
     };
 
@@ -82,7 +77,6 @@ export const ChannelUpdate = () => {
       : {
           ...channelEntity,
           workspace: channelEntity?.workspace?.id,
-          messages: channelEntity?.messages?.id,
           members: channelEntity?.members?.map(e => e.id.toString()),
         };
 
@@ -138,22 +132,6 @@ export const ChannelUpdate = () => {
                 <option value="" key="0" />
                 {workspaces
                   ? workspaces.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                id="channel-messages"
-                name="messages"
-                data-cy="messages"
-                label={translate('slackCloneTempApp.channel.messages')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {messages
-                  ? messages.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
