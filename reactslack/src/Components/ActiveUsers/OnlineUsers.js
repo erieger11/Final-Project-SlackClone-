@@ -31,7 +31,7 @@ const OnlineUsers = () => {
           {onlineUsers.map((user, index) => (
             <div className="user-card" key={user.id}>
               <img
-                src={getProfilePictureUrl(user) || 'default_profile_picture.jpg'} // Default image if getProfilePictureUrl returns falsy
+                src={getProfilePictureUrl(user) || '1000_F_141611292_BRl9iZYLLT0WCuI9pQtGXiLhqEYoxrTy.jpeg'} // Default image if getProfilePictureUrl returns falsy
                 alt={`${user.username} profile picture`}
               />
               <p>{user.username}</p>

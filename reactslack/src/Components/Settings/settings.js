@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Import for user data fetching and update (replace with your implementation)
-// import { getUserData, updateUserData, deleteUserAccount } from './UserApi';
+import { useNavigate } from 'react-router-dom'; // Import for navigation
 
 const Settings = () => {
   const [userData, setUserData] = useState({
@@ -11,6 +10,7 @@ const Settings = () => {
 
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
   const [error, setError] = useState(null); // Track errors
+  const navigate = useNavigate(); // Utilize useNavigate hook for navigation
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +56,12 @@ const Settings = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Implement your logout logic here (e.g., clear user data, session, etc.)
+    // Redirect to the default page (assumed to be home)
+    navigate('/'); // Navigate to the root path (likely your home page)
+  };
+
   return (
     <div className="settings-container">
       {isLoading ? (
@@ -74,6 +80,7 @@ const Settings = () => {
         </form>
       )}
       <button onClick={handleDeleteAccount}>Delete Account</button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

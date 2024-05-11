@@ -3,7 +3,7 @@ import './OfflineUsers.css';
 
 function OfflineUsers({ users }) {
   if (!users || users.length === 0) {
-    return <p>No offline users found.</p>;
+    return <p>No users found</p>;
   }
 
   return (
