@@ -1,23 +1,19 @@
-import Jane from './Assets/Chris.jpg';
-import profile from './Assets/profile.jpg';
-import io from 'socket.io-client';
 import React, { useEffect, useState, useRef } from 'react';
+import io from 'socket.io-client';
 import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
+//import './Message.css'; // Assuming you have a CSS file for styling
 const socket = io.connect('http://localhost:9000');
 const Message = () => {
   const [messageText, setMessageText] = useState('');
   const [messages, setMessages] = useState([]);
   const messageEndRef = useRef(null);
-
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const storedJWT = localStorage.getItem('token');
     console.log('------->TOKEN ', storedJWT);
@@ -40,28 +36,25 @@ const Message = () => {
     }
   };
   const [room, setRoom] = useState('');
-  // Messages States
-  const [message, setMessage] = useState('');
-  const [messageReceived, setMessageReceived] = useState('');
   const joinRoom = () => {
     if (room.trim() !== '') {
-      // Trim the input to remove leading and trailing spaces
       socket.emit('join_room', room);
     } else {
       alert('Please enter a room number.');
     }
   };
   const sendMessage = () => {
-    if (message.trim() !== '') {
-      // Trim the message to remove leading and trailing spaces
-      socket.emit('send_message', { message, room });
+    if (messageText.trim() !== '') {
+      socket.emit('send_message', { message: messageText, room });
+      setMessages((prevMessages) => [...prevMessages, { text: messageText, fromMe: true }]);
+      setMessageText('');
     } else {
       alert('Please enter a message.');
     }
   };
   useEffect(() => {
-    const handleReceiveMessage = data => {
-      setMessages(prevMessages => [...prevMessages, data.message]);
+    const handleReceiveMessage = (data) => {
+      setMessages((prevMessages) => [...prevMessages, { text: data.message, fromMe: false }]);
     };
     socket.on('receive_message', handleReceiveMessage);
     return () => {
@@ -69,32 +62,29 @@ const Message = () => {
     };
   }, []);
   return (
-    <div>
-      {messages.map((msg, index) => (
-        <div key={index} className="message">
-          <div className="messageInfo">
-            <img src={Jane} alt="" />
-            <span>just now</span>
+    <div className="message-container">
+      <div className="message-list">
+        {messages.map((msg, index) => (
+          <div key={index} className={msg.fromMe ? 'message from-me' : 'message from-others'}>
+            <div className="message-content">{msg.text}</div>
           </div>
-          <div className="messageContent">
-            <p>{msg}</p>
-          </div>
-        </div>
-      ))}
-      <div ref={messageEndRef} />
-      <div className='input'>
+        ))}
+        <div ref={messageEndRef} />
+      </div>
+      <div className="input">
         <input
           placeholder="Room Number..."
-          onChange={event => {
+          onChange={(event) => {
             setRoom(event.target.value);
           }}
         />
         <button onClick={joinRoom}>Join Room</button>
         <input
-          type='text'
+          type="text"
           placeholder="Type something"
-          onChange={event => {
-            setMessage(event.target.value);
+          value={messageText}
+          onChange={(event) => {
+            setMessageText(event.target.value);
           }}
         />
         <button onClick={sendMessage}>Send Message</button>
