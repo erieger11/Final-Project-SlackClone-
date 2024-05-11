@@ -1,11 +1,11 @@
-import { IMessage } from 'app/shared/model/message.model';
+import { IWorkspace } from 'app/shared/model/workspace.model';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 
 export interface IChannel {
   id?: number;
   name?: string;
   description?: string | null;
-  messages?: IMessage | null;
+  workspace?: IWorkspace | null;
   members?: IUserProfile[] | null;
 }
 
