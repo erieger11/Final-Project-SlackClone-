@@ -48,10 +48,6 @@ export const ChannelDetail = () => {
           </dt>
           <dd>{channelEntity.workspace ? channelEntity.workspace.id : ''}</dd>
           <dt>
-            <Translate contentKey="slackCloneTempApp.channel.messages">Messages</Translate>
-          </dt>
-          <dd>{channelEntity.messages ? channelEntity.messages.id : ''}</dd>
-          <dt>
             <Translate contentKey="slackCloneTempApp.channel.members">Members</Translate>
           </dt>
           <dd>

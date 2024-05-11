@@ -100,9 +100,6 @@ export const Channel = () => {
                   <Translate contentKey="slackCloneTempApp.channel.workspace">Workspace</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="slackCloneTempApp.channel.messages">Messages</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
                   <Translate contentKey="slackCloneTempApp.channel.members">Members</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -119,7 +116,6 @@ export const Channel = () => {
                   <td>{channel.name}</td>
                   <td>{channel.description}</td>
                   <td>{channel.workspace ? <Link to={`/workspace/${channel.workspace.id}`}>{channel.workspace.id}</Link> : ''}</td>
-                  <td>{channel.messages ? <Link to={`/message/${channel.messages.id}`}>{channel.messages.id}</Link> : ''}</td>
                   <td>
                     {channel.members
                       ? channel.members.map((val, j) => (

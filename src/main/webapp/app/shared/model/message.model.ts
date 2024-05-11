@@ -1,4 +1,4 @@
-import { IMention } from 'app/shared/model/mention.model';
+import { IChannel } from 'app/shared/model/channel.model';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 
 export interface IMessage {
@@ -6,7 +6,7 @@ export interface IMessage {
   uploads?: string | null;
   pinned?: number | null;
   timestamp?: number | null;
-  mentions?: IMention | null;
+  channel?: IChannel | null;
   userProfile?: IUserProfile | null;
 }
 

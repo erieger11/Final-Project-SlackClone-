@@ -21,9 +21,9 @@
       "uploads": "Uploads",
       "pinned": "Pinned",
       "timestamp": "Timestamp",
-      "mentions": "Mentions",
+      "channel": "Channel",
       "userProfile": "User Profile",
-      "channel": "Channel"
+      "mentions": "Mentions"
     }
   }
 }
