@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom"; 
+//import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { setChannel } from "./../../store/actioncreator";
 import { Notification } from "./Notification/notification";
 import "./Channels.css";
-import { Menu, Icon, Modal, Button, Form, Segment } from "semantic-ui-react";
-
+import { Menu, Icon, Modal, Button, Form, Segment, Checkbox } from "semantic-ui-react";
 const Channels = (props) => {
   const [modalOpenState, setModalOpenState] = useState(false);
   const [channelAddState, setChannelAddState] = useState({
     name: "",
     description: "",
+    users: [] // Add users field
   });
   const [isLoadingState, setLoadingState] = useState(false);
   const [channelsState, setChannelsState] = useState([]);
-
+  const [allUsers, setAllUsers] = useState([]);
   const channelsRef = MySQL.database().ref("channels");
   const usersRef = MySQL.database().ref("users");
-
   useEffect(() => {
+    // Fetch all users
+    usersRef.once("value", snapshot => {
+      const users = snapshot.val();
+      setAllUsers(users);
+    });
     channelsRef.on("child_added", (snap) => {
       setChannelsState((currentState) => {
         let updatedState = [...currentState];
@@ -28,27 +32,22 @@ const Channels = (props) => {
     });
     return () => channelsRef.off();
   }, []);
-
   useEffect(() => {
     if (channelsState.length > 0) {
       props.selectChannel(channelsState[0]);
     }
   }, [!props.channel ? channelsState : null]);
-
   const openModal = () => {
     setModalOpenState(true);
   };
-
   const closeModal = () => {
     setModalOpenState(false);
   };
-
   const checkIfFormValid = () => {
     return (
       channelAddState && channelAddState.name && channelAddState.description
     );
   };
-
   const displayChannels = () => {
     if (channelsState.length > 0) {
       return channelsState.map((channel) => {
@@ -60,18 +59,23 @@ const Channels = (props) => {
             <Button onClick={() => handleDeleteChannel(channel.id)}>
               Delete
             </Button>
+            {/* Display users */}
+            <ul>
+              {channel.users.map(user => (
+                <li key={user}>{user}</li>
+              ))}
+            </ul>
           </Menu.Item>
         );
-      });
+      });0
     }
   };
-
+// write code to route channel page
   const selectChannel = (channel) => {
     setLastVisited(props.user, props.channel);
     setLastVisited(props.user, channel);
     props.selectChannel(channel);
   };
-
   const setLastVisited = (user, channel) => {
     const lastVisited = usersRef
       .child(user.uid)
@@ -80,30 +84,27 @@ const Channels = (props) => {
     lastVisited.set(MySQL.database.ServerValue.TIMESTAMP);
     lastVisited.onDisconnect().set(MySQL.database.ServerValue.TIMESTAMP);
   };
-
   const onSubmit = () => {
     if (!checkIfFormValid()) {
       return;
     }
-
     const key = channelsRef.push().key;
-
     const channel = {
       id: key,
       name: channelAddState.name,
       description: channelAddState.description,
+      users: channelAddState.users, // Add users field
       created_by: {
         name: props.user.displayName,
         avatar: props.user.photoURL,
       },
     };
-
     setLoadingState(true);
     channelsRef
       .child(key)
       .update(channel)
       .then(() => {
-        setChannelAddState({ name: "", description: "" });
+        setChannelAddState({ name: "", description: "", users: [] });
         setLoadingState(false);
         closeModal();
       })
@@ -111,7 +112,6 @@ const Channels = (props) => {
         console.log(err);
       });
   };
-
   const handleInput = (e) => {
     let target = e.target;
     setChannelAddState((currentState) => {
@@ -120,12 +120,22 @@ const Channels = (props) => {
       return updatedState;
     });
   };
-
+  const handleUserCheckboxChange = (userId) => {
+    setChannelAddState((currentState) => {
+      let updatedState = { ...currentState };
+      // Toggle the user in the list
+      if (updatedState.users.includes(userId)) {
+        updatedState.users = updatedState.users.filter(id => id !== userId);
+      } else {
+        updatedState.users = [...updatedState.users, userId];
+      }
+      return updatedState;
+    });
+  };
   const handleDeleteChannel = (channelId) => {
     const updatedChannels = channelsState.filter(channel => channel.id !== channelId);
     setChannelsState(updatedChannels);
   };
-
   return (
     <>
       {" "}
@@ -162,6 +172,18 @@ const Channels = (props) => {
                 type="text"
                 placeholder="Enter Channel Description"
               />
+              {/* Display users to select */}
+              <Form.Field>
+                <label>Users</label>
+                {Object.keys(allUsers).map(userId => (
+                  <Checkbox
+                    key={userId}
+                    label={allUsers[userId].displayName}
+                    checked={channelAddState.users.includes(userId)}
+                    onChange={() => handleUserCheckboxChange(userId)}
+                  />
+                ))}
+              </Form.Field>
             </Segment>
           </Form>
         </Modal.Content>
@@ -177,18 +199,15 @@ const Channels = (props) => {
     </>
   );
 };
-
 const mapStateToProps = (state) => {
   return {
     user: state.user.currentUser,
     channel: state.channel.currentChannel,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     selectChannel: (channel) => dispatch(setChannel(channel)),
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Channels);
