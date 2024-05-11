@@ -90,31 +90,24 @@ const Message = () => {
           <p>{message}</p>
         </div>
       </div>
-      {/* <div className='input'>
+      <div className='input'>
       <input
         placeholder="Room Number..."
         onChange={event => {
           setRoom(event.target.value);
         }}
-      /></div>
-      
-      <button onClick={joinRoom}>Join Room</button> */}
-      <div className='input'>
+      />
+      <button onClick={joinRoom}>Join Room</button>
       <input type='text' placeholder="Type something"
         onChange={event => {
           setMessage(event.target.value);
         }}
       />
-      <div className="send"></div>
-      <FaImage />
-      <input type="file" style={{ display: "none" }} id="file" />
-      <label htmlFor="file">
-        <FaCloudUploadAlt />
-      </label>
+      
       <button onClick={sendMessage}>Send Message</button></div>
       </div>
-
-
+   
+   
   );
 };
 
