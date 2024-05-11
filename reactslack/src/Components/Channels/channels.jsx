@@ -80,7 +80,7 @@ const Channels = (props) => {
       });0
     }
   };
-
+// write code to route channel page
   const selectChannel = (channel) => {
     setLastVisited(props.user, props.channel);
     setLastVisited(props.user, channel);
