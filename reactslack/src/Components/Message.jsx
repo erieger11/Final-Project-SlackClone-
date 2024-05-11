@@ -1,11 +1,22 @@
 import Jane from './Assets/Chris.jpg';
 import profile from './Assets/profile.jpg';
 import io from 'socket.io-client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
 const socket = io.connect('http://localhost:9000');
 const Message = () => {
   const [messageText, setMessageText] = useState('');
+  const [messages, setMessages] = useState([]);
+  const messageEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const handleSubmit = async e => {
     e.preventDefault();
     const storedJWT = localStorage.getItem('token');
@@ -50,48 +61,45 @@ const Message = () => {
   };
   useEffect(() => {
     const handleReceiveMessage = data => {
-      setMessageReceived(data.message);
+      setMessages(prevMessages => [...prevMessages, data.message]);
     };
     socket.on('receive_message', handleReceiveMessage);
     return () => {
       socket.off('receive_message', handleReceiveMessage);
     };
-  }, [messageReceived]);
+  }, []);
   return (
     <div>
-      <div className="message ">
-        <div className="messageInfo">
-          <img src={Jane} alt="" />
-          <span>just now</span>
+      {messages.map((msg, index) => (
+        <div key={index} className="message">
+          <div className="messageInfo">
+            <img src={Jane} alt="" />
+            <span>just now</span>
+          </div>
+          <div className="messageContent">
+            <p>{msg}</p>
+          </div>
         </div>
-        <div className="messageContent">
-          <p>{messageReceived}</p>
-        </div>
-      </div>
-      <div className="message owner">
-        <div className="messageInfo">
-          <img src={Jane} alt="" />
-          <span>just now</span>
-        </div>
-        <div className="messageContent">
-          <p>{message}</p>
-        </div>
-      </div>
+      ))}
+      <div ref={messageEndRef} />
       <div className='input'>
-      <input
-        placeholder="Room Number..."
-        onChange={event => {
-          setRoom(event.target.value);
-        }}
-      />
-      <button onClick={joinRoom}>Join Room</button>
-      <input type='text' placeholder="Type something"
-        onChange={event => {
-          setMessage(event.target.value);
-        }}
-      />
-      <button onClick={sendMessage}>Send Message</button></div>
+        <input
+          placeholder="Room Number..."
+          onChange={event => {
+            setRoom(event.target.value);
+          }}
+        />
+        <button onClick={joinRoom}>Join Room</button>
+        <input
+          type='text'
+          placeholder="Type something"
+          onChange={event => {
+            setMessage(event.target.value);
+          }}
+        />
+        <button onClick={sendMessage}>Send Message</button>
       </div>
+    </div>
   );
 };
 export default Message;

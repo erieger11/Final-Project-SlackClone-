@@ -189,11 +189,4 @@ public class UserProfileResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
-
-    @GetMapping("/{login}")
-    public ResponseEntity<UserProfile> getUserProfileByLogin(@PathVariable("login") String login) {
-        log.debug("REST request to get UserProfile : {}", login);
-        Optional<UserProfile> userProfile = userProfileRepository.findOneWithEagerRelationships(login);
-        return ResponseUtil.wrapOrNotFound(userProfile);
-    }
 }
