@@ -1,17 +1,20 @@
 import React from "react";
 import Message from "./Message";
-import Sidebar from "./Sidebar/sidebar";
-import RightSidebar from "./RightSidebar/RightSidebar";
-import Header from "./Header"
 
-const Messages = () => {
+const Messages = ({ messages }) => {
+  if (!messages || messages.length === 0) {
+    return <p>No messages yet</p>;
+  }
+
   return (
     <div className="messages">
-      <Message />
-      {/* <Sidebar/>
-      <RightSidebar/> */}
+      {messages.map((msg, index) => (
+        <Message key={index} msg={msg} />
+      ))}
     </div>
   );
 };
 
 export default Messages;
+
+
