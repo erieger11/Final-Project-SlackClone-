@@ -1,19 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
-import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
-//import './Message.css'; // Assuming you have a CSS file for styling
+import React, { useEffect, useState } from 'react';
+
+
 const socket = io.connect('http://localhost:9000');
+
 const Message = () => {
   const [messageText, setMessageText] = useState('');
+  const [room, setRoom] = useState('');
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const messageEndRef = useRef(null);
-  const scrollToBottom = () => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
     const storedJWT = localStorage.getItem('token');
     console.log('------->TOKEN ', storedJWT);
@@ -31,11 +28,9 @@ const Message = () => {
       }
       setMessageText('');
     } catch (error) {
-      console.error('Error:', error);
-      // Handle the error (display a message to the user)
+      console.error('Error:', error); 
     }
   };
-  const [room, setRoom] = useState('');
   const joinRoom = () => {
     if (room.trim() !== '') {
       socket.emit('join_room', room);
@@ -43,53 +38,74 @@ const Message = () => {
       alert('Please enter a room number.');
     }
   };
+
   const sendMessage = () => {
-    if (messageText.trim() !== '') {
-      socket.emit('send_message', { message: messageText, room });
-      setMessages((prevMessages) => [...prevMessages, { text: messageText, fromMe: true }]);
-      setMessageText('');
+    if (message.trim() !== '') {
+      socket.emit('send_message', { message: message.trim(), room });
     } else {
       alert('Please enter a message.');
     }
   };
+
   useEffect(() => {
-    const handleReceiveMessage = (data) => {
-      setMessages((prevMessages) => [...prevMessages, { text: data.message, fromMe: false }]);
+    const handleReceiveMessage = data => {
+      setMessages(prevMessages => [...prevMessages, data.message]);
     };
+
     socket.on('receive_message', handleReceiveMessage);
+
     return () => {
       socket.off('receive_message', handleReceiveMessage);
     };
   }, []);
+
+  useEffect(() => {
+    const element = document.querySelector('.message-container');
+    element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [messages]);
+
   return (
     <div className="message-container">
-      <div className="message-list">
-        {messages.map((msg, index) => (
-          <div key={index} className={msg.fromMe ? 'message from-me' : 'message from-others'}>
-            <div className="message-content">{msg.text}</div>
+      
+      {messages.map((msg, index) => (
+        <div key={index} className="message">
+          
+          <div className="messageInfo">
+            <span>just now</span>
+            
           </div>
-        ))}
-        <div ref={messageEndRef} />
-      </div>
+          
+          <div className="messageContent">
+            <p>{msg}</p>
+            
+          </div>
+          
+        </div>
+      ))}
+  
       <div className="input">
+       
         <input
           placeholder="Room Number..."
-          onChange={(event) => {
+          onChange={event => {
             setRoom(event.target.value);
           }}
         />
         <button onClick={joinRoom}>Join Room</button>
+        
         <input
           type="text"
           placeholder="Type something"
-          value={messageText}
-          onChange={(event) => {
-            setMessageText(event.target.value);
+          onChange={event => {
+            setMessage(event.target.value);
           }}
         />
         <button onClick={sendMessage}>Send Message</button>
+        
       </div>
+      
     </div>
   );
 };
+
 export default Message;
