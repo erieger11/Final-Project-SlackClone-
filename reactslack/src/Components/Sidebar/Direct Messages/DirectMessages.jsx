@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PrivateChat = () => {
   const [privateChats, setPrivateChats] = useState([]);
   const [newPrivateChatName, setNewPrivateChatName] = useState("");
+
+//   useEffect(() => {
+//     fetch('http://localhost:8080/api/user-profiles')
+//       .then(response => response.json())
+//       .then(data => {
+//         // Assuming the API returns an array of user profiles with a 'name' property
+//         setPrivateChats(data.map((profile, index) => ({
+//           id: index + 1,
+//           name: profile.name
+//         })));
+//       })
+//       .catch(error => {
+//         console.error('Error fetching user profiles:', error);
+//         // Handle the error (display a message to the user, etc.)
+//       });
+//   }, []);
 
   const handleAddPrivateChat = () => {
     if (newPrivateChatName.trim() === "") {

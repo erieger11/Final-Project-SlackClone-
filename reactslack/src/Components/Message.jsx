@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import { FaImage, FaCloudUploadAlt } from 'react-icons/fa';
-//import './Message.css'; // Assuming you have a CSS file for styling
+// import './Message.css'; // Assuming you have a CSS file for styling
 const socket = io.connect('http://localhost:9000');
 const Message = () => {
   const [messageText, setMessageText] = useState('');

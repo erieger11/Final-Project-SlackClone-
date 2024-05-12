@@ -36,10 +36,10 @@ p {
   1. HELPER CLASESS
   2. NAV
   3. HERO
-  
+
   4. SECTIONS
      4.1. GOAL
-  
+
   5. CTA (CALL TO ACTION)
   6. FOOTER
   7. MEDIA QUERIES
@@ -127,7 +127,8 @@ p {
   padding: 15px 40px;
   border-radius: 50px;
 }
-/* 
+
+/*
   .build_comm {
     width: 30%;
     margin: 10px 0;

@@ -4,7 +4,10 @@ import './sidebar.css';
 const Sidebar = () => {
   // Dummy data for channels (replace with actual data)
   const [channels, setChannels] = useState([
-    { id: 1, name: 'General' },
+    { id: 1, name: 'General'},
+    { id: 2, name: 'Announcements'},
+    { id: 3, name: 'Chat Rules'},
+    { id: 4, name: 'Questions Help'},
   ]);
 
   const [privateChats, setPrivateChats] = useState([]);
@@ -52,12 +55,12 @@ const Sidebar = () => {
       <h2>Channels</h2>
       <ul>
         {/* Render list of channels */}
-        {channels.map(channel => (
-          <li key={channel.id}>
-            <a href={`/channel/${channel.id}`}>{channel.name}</a>
-            <button onClick={() => handleDeleteChannel(channel.id)}>Delete</button>
-          </li>
-        ))}
+       {channels.map(channel => (
+         <li key={channel.id}>
+           <a href={`/${channel.name.replace(/\s+/g, '-')}`}>{channel.name}</a>
+           
+         </li>
+       ))}
       </ul>
       <div className="add-channel">
         <input
@@ -70,7 +73,7 @@ const Sidebar = () => {
       </div>
 
       {/* Private Chats Section */}
-      
+
       <h2>Direct Messages</h2>
       <ul>
         {/* Render list of private chats */}
@@ -93,8 +96,7 @@ const Sidebar = () => {
       </div>
     </div>
   );
-  
+
 }
 
 export default Sidebar;
-
