@@ -41,7 +41,11 @@ const Message = () => {
 
   const sendMessage = () => {
     if (message.trim() !== '') {
+      
       socket.emit('send_message', { message: message.trim(), room });
+  
+      setMessages(prevMessages => [...prevMessages, message.trim()]);
+      setMessage('');
     } else {
       alert('Please enter a message.');
     }
@@ -63,7 +67,6 @@ const Message = () => {
     const element = document.querySelector('.message-container');
     element.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages]);
-
   return (
     <div className="message-container">
       
@@ -77,7 +80,6 @@ const Message = () => {
           
           <div className="messageContent">
             <p>{msg}</p>
-            
           </div>
           
         </div>
