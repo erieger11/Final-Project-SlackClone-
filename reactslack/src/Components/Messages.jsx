@@ -9,6 +9,8 @@ const Messages = () => {
     <div className="messages">
     
       <Message />
+      <Sidebar/>
+      <RightSidebar/>
       
     </div>
   );
