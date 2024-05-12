@@ -1,59 +1,71 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import * as TbIcons from 'react-icons/tb';
-import * as AiIcons from 'react-icons/ai';
-import { RightsidebarData } from './RightSidebarData';
-import './RightSidebar.css';
+import React, { useState, useEffect } from 'react';
+import Settings from '../Settings/settings';
+import OnlineUsers from '../ActiveUsers/OnlineUsers.js';
+import OfflineUsers from '../ActiveUsers/OfflineUsers.js';
+import './RightSidebar.css'; // Assuming the CSS file remains the same
 
-// function Rightsidebar() {
-//   const [setRightSidebar] = useState(false);
+const RightSidebar = () => {
+  // State for the active tab
+  const [activeTab, setActiveTab] = useState('');
 
-//   const showRightSidebar = () => setRightSidebar(!setRightSidebar);
+  // State for user profile picture URL
+  const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
-//   return (
-//     <>
-//       <div className="rightsidebar">
-//         <Link href="#/" className="menu-bars">
-//           <TbIcons.TbLayoutSidebarRightExpand onClick={showRightSidebar} />
-//         </Link>
-//       </div>
-//       <nav className={setRightSidebar ? 'right-menu active' : 'right-menu'}>
-//         <ul className="right-menu-items">
-//           <li className="rightbar-toggle">
-//             <Link href="#/" className="menu-bars">
-//               <AiIcons.AiOutlineCloseSquare />
-//             </Link>
-//           </li>
-//           {RightsidebarData.map((item, index) => {
-//             return (
-//               <li key={index} className={item.cName}>
-//                 <Link to={item.path}>
-//                   {item.icon}
-//                   <span>{item.title}</span>
-//                 </Link>
-//               </li>
-//             );
-//           })}
-//         </ul>
-//       </nav>
-//     </>
-//   );
-// }
+  const handleTabChange = tabName => {
+    setActiveTab(tabName);
+  };
 
-// export default Rightsidebar;
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'Settings':
+        return <Settings />;
+      case 'OnlineUsers':
+        return <OnlineUsers />;
+      case 'OfflineUsers':
+        return <OfflineUsers />;
+      default:
+        return null;
+    }
+  };
 
-function RightSidebar() {
+  // Fetch user profile picture on component mount (assuming a fetchUserProfilePicture function)
+  useEffect(() => {
+    const fetchUserProfilePicture = async () => {
+      try {
+        const url = await fetchUserProfilePicture(); // Replace with your logic to fetch URL
+        setProfilePictureUrl(url);
+      } catch (err) {
+        console.error('Error fetching profile picture:', err);
+      }
+    };
+
+    fetchUserProfilePicture();
+  }, []); // Run on component mount
+
   return (
-    <div className="right-sidebar">
-      <h2>Users</h2>
-      <ul>
-        <li>Home</li>
-        <li>Settings</li>
-        <li>Online</li>
-        <li>Offline</li>
+    <div className="right-side-bar">
+      <div className="user-profile">
+        {profilePictureUrl ? (
+          <img src={profilePictureUrl} alt="User Profile Picture" />
+        ) : (
+          <div className="profile-placeholder">Welcome</div>
+        )}
+      </div>
+      <h2>Table Talkers</h2>
+      <ul className="right-sidebar-tabs">
+        <li className={activeTab === 'Settings' ? 'active' : ''} onClick={() => handleTabChange('Settings')}>
+          Settings
+        </li>
+        <li className={activeTab === 'OnlineUsers' ? 'active' : ''} onClick={() => handleTabChange('OnlineUsers')}>
+          Online
+        </li>
+        <li className={activeTab === 'OfflineUsers' ? 'active' : ''} onClick={() => handleTabChange('OfflineUsers')}>
+          Offline
+        </li>
       </ul>
+      {renderContent()}
     </div>
   );
-}
+};
 
 export default RightSidebar;

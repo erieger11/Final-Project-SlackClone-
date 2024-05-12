@@ -10,14 +10,14 @@
     "prettier",
     "eslint-config-prettier"
   ],
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "project": ["./tsconfig.json", "./tsconfig.test.json"]
-  },
+  // "parserOptions": {
+  //   "ecmaVersion": 2018,
+  //   "sourceType": "module",
+  //   "ecmaFeatures": {
+  //     "jsx": true
+  //   },
+  //   "project": ["./tsconfig.json", "./tsconfig.test.json"]
+  // },
   "settings": {
     "react": {
       "version": "detect"

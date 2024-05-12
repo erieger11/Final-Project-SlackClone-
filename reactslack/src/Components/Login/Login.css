@@ -14,9 +14,9 @@ body {
 }
 
 .wrapper {
-  position: relative;
+  position: center;
   width: 420px;
-  height: 450px;
+  height: 480px;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(30px);
@@ -30,17 +30,19 @@ body {
 }
 
 .wrapper.active {
-  height: 520px;
+  height: 720px;
 }
 
 .wrapper .form-box {
   width: 100%;
   padding: 40px;
+  align-items: center;
 }
 
 .wrapper .form-box.login {
   transition: translate 0.18s ease;
   translate: 0;
+  align-items: center;
 }
 
 .wrapper.active .form-box.login {

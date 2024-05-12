@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Header, Icon, Image, Dropdown } from "semantic-ui-react";
-//import { connect } from "react-redux";
+
 
 
 import "./UserInfo.css";
@@ -16,7 +16,7 @@ const UserInfo = (props) => {
   };
 
   const signOut = () => {
-    firebase
+    MySQL
       .auth()
       .signOut()
       .then(() => console.log("user signed out"));
