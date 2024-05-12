@@ -97,6 +97,9 @@ export const Mention = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('body')} />
                 </th>
                 <th>
+                  <Translate contentKey="slackCloneTempApp.mention.message">Message</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="slackCloneTempApp.mention.userProfile">User Profile</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -112,6 +115,7 @@ export const Mention = () => {
                   </td>
                   <td>{mention.userName}</td>
                   <td>{mention.body}</td>
+                  <td>{mention.message ? <Link to={`/message/${mention.message.id}`}>{mention.message.id}</Link> : ''}</td>
                   <td>{mention.userProfile ? <Link to={`/user-profile/${mention.userProfile.id}`}>{mention.userProfile.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

@@ -28,15 +28,15 @@ class MessageTest {
     }
 
     @Test
-    void mentionsTest() throws Exception {
+    void channelTest() throws Exception {
         Message message = getMessageRandomSampleGenerator();
-        Mention mentionBack = getMentionRandomSampleGenerator();
+        Channel channelBack = getChannelRandomSampleGenerator();
 
-        message.setMentions(mentionBack);
-        assertThat(message.getMentions()).isEqualTo(mentionBack);
+        message.setChannel(channelBack);
+        assertThat(message.getChannel()).isEqualTo(channelBack);
 
-        message.mentions(null);
-        assertThat(message.getMentions()).isNull();
+        message.channel(null);
+        assertThat(message.getChannel()).isNull();
     }
 
     @Test
@@ -52,24 +52,24 @@ class MessageTest {
     }
 
     @Test
-    void channelTest() throws Exception {
+    void mentionsTest() throws Exception {
         Message message = getMessageRandomSampleGenerator();
-        Channel channelBack = getChannelRandomSampleGenerator();
+        Mention mentionBack = getMentionRandomSampleGenerator();
 
-        message.addChannel(channelBack);
-        assertThat(message.getChannels()).containsOnly(channelBack);
-        assertThat(channelBack.getMessages()).isEqualTo(message);
+        message.addMentions(mentionBack);
+        assertThat(message.getMentions()).containsOnly(mentionBack);
+        assertThat(mentionBack.getMessage()).isEqualTo(message);
 
-        message.removeChannel(channelBack);
-        assertThat(message.getChannels()).doesNotContain(channelBack);
-        assertThat(channelBack.getMessages()).isNull();
+        message.removeMentions(mentionBack);
+        assertThat(message.getMentions()).doesNotContain(mentionBack);
+        assertThat(mentionBack.getMessage()).isNull();
 
-        message.channels(new HashSet<>(Set.of(channelBack)));
-        assertThat(message.getChannels()).containsOnly(channelBack);
-        assertThat(channelBack.getMessages()).isEqualTo(message);
+        message.mentions(new HashSet<>(Set.of(mentionBack)));
+        assertThat(message.getMentions()).containsOnly(mentionBack);
+        assertThat(mentionBack.getMessage()).isEqualTo(message);
 
-        message.setChannels(new HashSet<>());
-        assertThat(message.getChannels()).doesNotContain(channelBack);
-        assertThat(channelBack.getMessages()).isNull();
+        message.setMentions(new HashSet<>());
+        assertThat(message.getMentions()).doesNotContain(mentionBack);
+        assertThat(mentionBack.getMessage()).isNull();
     }
 }

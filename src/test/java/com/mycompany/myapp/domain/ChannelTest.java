@@ -44,11 +44,21 @@ class ChannelTest {
         Channel channel = getChannelRandomSampleGenerator();
         Message messageBack = getMessageRandomSampleGenerator();
 
-        channel.setMessages(messageBack);
-        assertThat(channel.getMessages()).isEqualTo(messageBack);
+        channel.addMessages(messageBack);
+        assertThat(channel.getMessages()).containsOnly(messageBack);
+        assertThat(messageBack.getChannel()).isEqualTo(channel);
 
-        channel.messages(null);
-        assertThat(channel.getMessages()).isNull();
+        channel.removeMessages(messageBack);
+        assertThat(channel.getMessages()).doesNotContain(messageBack);
+        assertThat(messageBack.getChannel()).isNull();
+
+        channel.messages(new HashSet<>(Set.of(messageBack)));
+        assertThat(channel.getMessages()).containsOnly(messageBack);
+        assertThat(messageBack.getChannel()).isEqualTo(channel);
+
+        channel.setMessages(new HashSet<>());
+        assertThat(channel.getMessages()).doesNotContain(messageBack);
+        assertThat(messageBack.getChannel()).isNull();
     }
 
     @Test

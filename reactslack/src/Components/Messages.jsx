@@ -7,11 +7,8 @@ import Header from "./Header"
 const Messages = () => {
   return (
     <div className="messages">
-    
+
       <Message />
-      <Sidebar/>
-      <RightSidebar/>
-      
     </div>
   );
 };
