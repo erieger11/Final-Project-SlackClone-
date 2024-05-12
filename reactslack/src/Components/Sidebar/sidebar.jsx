@@ -5,6 +5,8 @@ const Sidebar = () => {
   // Dummy data for channels (replace with actual data)
   const [channels, setChannels] = useState([
     { id: 1, name: 'General' },
+    { id: 2, name: 'Announcements' },
+    { id: 3, name: 'Rules' },
   ]);
 
   const [privateChats, setPrivateChats] = useState([]);
