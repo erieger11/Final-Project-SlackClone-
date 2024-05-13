@@ -51,30 +51,37 @@ const Chat = () => {
   };
 
 // Function to send a message.
-  const sendMessage = () => {
-    if (messageText.trim() !== '') {
-      // Emit a 'send_message' event to the server with the message and room number.
-      socket.emit('send_message', { message: messageText.trim(), room });
-      setMessages(prevMessages => [...prevMessages, messageText.trim()]);
-      // Clear the input after sending the message.
-      setMessageText('');
-    } else {
-      alert('Please enter a message.');
-    }
-  };
+const sendMessage = () => {
+  if (messageText.trim() !== '') {
+    const author = localStorage.getItem('authenticatedUsername');
+    const timestamp = Date.now(); // Current timestamp in milliseconds
+    // Emit a 'send_message' event to the server with the message, author, timestamp, and room number.
+    socket.emit('send_message', { message: messageText.trim(), author, timestamp, room });
+    setMessages(prevMessages => [...prevMessages, { message: messageText.trim(), author, timestamp }]);
+    // Clear the input after sending the message.
+    setMessageText('');
+  } else {
+    alert('Please enter a message.');
+  }
+};
 
 // useEffect hook to listen for 'receive_message' events from the server.
   useEffect(() => {
     // Function to handle received messages.
     const handleReceiveMessage = data => {
-      setMessages(prevMessages => [...prevMessages, data.message]);
+      const { message, author, timestamp } = data;
+      console.log("Received Message:", { message, author, timestamp });
+      setMessages(prevMessages => [...prevMessages, { message, author, timestamp }]);
     };
 // Listen for 'receive_message' events.
     socket.on('receive_message', handleReceiveMessage);
+      console.log(handleReceiveMessage);
 
 // Clean up the event listener when the component is unmounted.
     return () => {
       socket.off('receive_message', handleReceiveMessage);
+            console.log(handleReceiveMessage);
+
     };
   }, []);
 
