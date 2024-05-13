@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaHeadset, FaUserPlus } from 'react-icons/fa';
 import Messages from './Messages';
 // Library for real-time bidirectional event-based communication.
-import io from 'socket.io-client';  
+import io from 'socket.io-client';
 
 // Establishes a connection to a Socket.IO server running locally on port 9000.
 const socket = io.connect('http://localhost:9000');
@@ -42,6 +42,7 @@ const Chat = () => {
   // Function to join a room.
   const joinRoom = () => {
     if (room.trim() !== '') {
+    console.log(localStorage.getItem('authenticatedUsername'))
       // Emit a 'join_room' event to the server with the room number.
       socket.emit('join_room', room);
     } else {
@@ -56,7 +57,7 @@ const Chat = () => {
       socket.emit('send_message', { message: messageText.trim(), room });
       setMessages(prevMessages => [...prevMessages, messageText.trim()]);
       // Clear the input after sending the message.
-      setMessageText(''); 
+      setMessageText('');
     } else {
       alert('Please enter a message.');
     }

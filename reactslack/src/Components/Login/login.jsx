@@ -11,7 +11,6 @@ const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
-
 //ignore below
     const emailRef = useRef(null);
     const phoneNumberRef = useRef(null);
@@ -41,9 +40,6 @@ const handleLogin = (event) => {
     // Store the authenticated username in localStorage
     localStorage.setItem('authenticatedUsername', username);
 };
-
-
-
     const loginLink = (username , password) => {
         fetch('http://localhost:8080/api/authenticate', {
             method: 'POST',
@@ -62,6 +58,9 @@ const handleLogin = (event) => {
             return response.json();
         })
        .then((data) => {
+           const uN = localStorage.getItem('authenticatedUsername');
+
+               console.log(uN);
                console.log(data);
 
                if (data.id_token) {
@@ -70,6 +69,8 @@ const handleLogin = (event) => {
 
                    // Redirect the user upon successful login
                    window.location.href = '/main';
+
+
                } else {
                    alert('Invalid username or password');
                }
