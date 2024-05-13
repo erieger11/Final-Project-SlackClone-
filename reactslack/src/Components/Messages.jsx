@@ -1,13 +1,19 @@
-import React from "react";
-import Message from "./Message";
+import React from 'react';
+import Message from './Message';
+import './messages.css'; // Import the CSS file
 
-const Messages = () => {
+const Messages = ({ messages }) => {
+  // If there are no messages, display a message
+  if (!messages || messages.length === 0) {
+    return <p>Start conversation here!</p>;
+  }
+
   return (
+    // Loop through the messages and display them using the Message component
     <div className="messages">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {messages.map((msg, index) => (
+        <Message key={index} msg={msg} />
+      ))}
     </div>
   );
 };

@@ -1,20 +1,19 @@
 import React from 'react';
 import Jane from './Assets/Chris.jpg';
-import profile from './Assets/profile.jpg';
+import './message.css';
 
-const Message = () => {
+const Message = ({ msg }) => {
+  console.log(msg);
   return (
-    <div className="message owner">
-      <div className="messageInfo">
-        <img src={Jane} alt="" />
-        <span>just now</span>
-      </div>
-      <div className="messageContent">
-        <p>hello</p>
-        <img src={profile} alt="Profile" />
-      </div>
-    </div>
-  );
-};
+     <div className="message">
+       <div className="messageContent">
+         <p>{msg.message}</p>
+         <div className="messageInfo">
+           <span>{msg.author} - {new Date(msg.timestamp).toLocaleTimeString()}</span>
+         </div>
+       </div>
+     </div>
+   );
+ };
 
 export default Message;

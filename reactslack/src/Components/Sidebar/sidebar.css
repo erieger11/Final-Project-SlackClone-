@@ -31,36 +31,123 @@
    */
 /* sidebar.css */
 
+/* sidebar.css */
+
+/* .sidebar {
+    width: 200px;
+    height: 100%;
+    background-color: #7fe193;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar li a:hover {
+    text-decoration: underline;
+  }
+   */
+/* sidebar.css */
+
+/* sidebar.css */
+
+/* sidebar.css */
+
+/* sidebar.css */
+
 .sidebar {
-  width: 200px;
-  height: 100%;
+  width: 250px;
   background-color: #72d5e2;
-  color: #fff;
   padding: 20px;
-  position: fixed; /* Fixes the sidebar position */
-  left: 0; /* Positions the sidebar on the left side */
-  top: 0; /* Aligns the sidebar to the top */
+  border-right: 1px solid #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto; /* Allow scrolling if content exceeds viewport height */
+}
+
+.sidebar h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #fff;
 }
 
 .sidebar h2 {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
 }
 
 .sidebar ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
-.sidebar li {
+.sidebar ul li {
   margin-bottom: 10px;
 }
 
-.sidebar li a {
+.add-channel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.add-channel input {
+  margin-right: 10px;
+}
+
+.add-channel button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add-channel button:hover {
+  background-color: #0056b3;
+}
+
+/* Delete button style */
+.sidebar ul li button,
+.add-channel button {
+  background-color: #2b1996;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.sidebar ul li button:hover,
+.add-channel button:hover {
+  background-color: #2b1996;
+}
+
+/* Channel link style */
+.sidebar ul li a {
   color: #fff;
   text-decoration: none;
 }
 
-.sidebar li a:hover {
+.sidebar ul li a:hover {
   text-decoration: underline;
 }

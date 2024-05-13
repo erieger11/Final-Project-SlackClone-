@@ -2,11 +2,13 @@ import React, { useState, useRef } from 'react';
 import './Login.css';
 import { FaUser, FaLock, FaEnvelope, FaPhoneSquare } from 'react-icons/fa';
 
+
 const Login = () => {
     const [loginAction, setLoginAction] = useState('');
     const [registerAction, setRegisterAction] = useState('');
     const [curUsername, setCurUsername] = useState('');
     const [curPassword, setCurPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
 //ignore below
@@ -26,7 +28,7 @@ const Login = () => {
 //       loginLink(curUsername, curPassword);
 //     }
 
-    const handleLogin = (event) => {
+const handleLogin = (event) => {
     event.preventDefault();
     const username = event.target.elements.username.value;
     const password = event.target.elements.password.value;
@@ -35,9 +37,9 @@ const Login = () => {
     console.log(`Username: ${username}`);
     console.log(`Password: ${password}`);
     loginLink(username, password);
-    }
-
-
+    // Store the authenticated username in localStorage
+    localStorage.setItem('authenticatedUsername', username);
+};
     const loginLink = (username , password) => {
         fetch('http://localhost:8080/api/authenticate', {
             method: 'POST',
@@ -56,13 +58,19 @@ const Login = () => {
             return response.json();
         })
        .then((data) => {
+           const uN = localStorage.getItem('authenticatedUsername');
+
+               console.log(uN);
                console.log(data);
 
                if (data.id_token) {
-                   localStorage.setItem('token', data.token);
+                   localStorage.setItem('token', data.id_token);
+                   setIsLoggedIn(true);
 
                    // Redirect the user upon successful login
                    window.location.href = '/main';
+
+
                } else {
                    alert('Invalid username or password');
                }
@@ -72,6 +80,10 @@ const Login = () => {
             alert('Failed to login. Please try again.');
         });
     };
+
+    const logLink = () => {
+        setLoginAction("");
+      };
 
 
 
@@ -129,6 +141,7 @@ const Login = () => {
 
 
     return (
+
         <div className={`wrapper${loginAction}`}>
             <div className="form-box login">
                 <form action="" onSubmit={handleLogin}>
@@ -166,6 +179,7 @@ const Login = () => {
                 </form>
             </div>
 
+
             <div className={`form-box register${registerAction}`}>
                 <form onSubmit={handleRegisterSubmit}>
                     <h1>Registration</h1>
@@ -200,6 +214,14 @@ const Login = () => {
                     </div>
 
                     <button type="submit">Register</button>
+                    <div className="register-link">
+                        <p>
+                            Already have an account?{' '}
+                            <a href="#" onClick={logLink}>
+                                Login
+                            </a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>

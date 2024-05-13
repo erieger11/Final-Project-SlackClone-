@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-
+//import { connect } from "react-redux";
+import { Link } from "react-router-dom"; 
 import { setChannel } from "./../../store/actioncreator";
 import { Notification } from "./Notification/notification";
 import "./Channels.css";
-import { Menu, Icon, Modal, Button, Form, Segment } from "semantic-ui-react";
+import { Menu, Icon, Modal, Button, Form, Segment, Checkbox } from "semantic-ui-react";
 
 const Channels = (props) => {
   const [modalOpenState, setModalOpenState] = useState(false);
   const [channelAddState, setChannelAddState] = useState({
     name: "",
     description: "",
+    users: [] // Add users field
   });
   const [isLoadingState, setLoadingState] = useState(false);
   const [channelsState, setChannelsState] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   const channelsRef = MySQL.database().ref("channels");
   const usersRef = MySQL.database().ref("users");
 
   useEffect(() => {
+    // Fetch all users
+    usersRef.once("value", snapshot => {
+      const users = snapshot.val();
+      setAllUsers(users);
+    });
+
     channelsRef.on("child_added", (snap) => {
       setChannelsState((currentState) => {
         let updatedState = [...currentState];
@@ -53,28 +61,25 @@ const Channels = (props) => {
     if (channelsState.length > 0) {
       return channelsState.map((channel) => {
         return (
-          <Menu.Item
-            key={channel.id}
-            name={channel.name}
-            onClick={() => selectChannel(channel)}
-            active={
-              props.channel &&
-              channel.id === props.channel.id &&
-              !props.channel.isFavourite
-            }
-          >
-            <Notification
-              user={props.user}
-              channel={props.channel}
-              notificationChannelId={channel.id}
-              displayName={"# " + channel.name}
-            />
+          <Menu.Item key={channel.id} name={channel.name}>
+            <Link to={`/channel/${channel.id}`}>
+              {channel.name}
+            </Link>
+            <Button onClick={() => handleDeleteChannel(channel.id)}>
+              Delete
+            </Button>
+            {/* Display users */}
+            <ul>
+              {channel.users.map(user => (
+                <li key={user}>{user}</li>
+              ))}
+            </ul>
           </Menu.Item>
         );
-      });
+      });0
     }
   };
-
+// write code to route channel page
   const selectChannel = (channel) => {
     setLastVisited(props.user, props.channel);
     setLastVisited(props.user, channel);
@@ -101,6 +106,7 @@ const Channels = (props) => {
       id: key,
       name: channelAddState.name,
       description: channelAddState.description,
+      users: channelAddState.users, // Add users field
       created_by: {
         name: props.user.displayName,
         avatar: props.user.photoURL,
@@ -112,7 +118,7 @@ const Channels = (props) => {
       .child(key)
       .update(channel)
       .then(() => {
-        setChannelAddState({ name: "", description: "" });
+        setChannelAddState({ name: "", description: "", users: [] });
         setLoadingState(false);
         closeModal();
       })
@@ -128,6 +134,24 @@ const Channels = (props) => {
       updatedState[target.name] = target.value;
       return updatedState;
     });
+  };
+
+  const handleUserCheckboxChange = (userId) => {
+    setChannelAddState((currentState) => {
+      let updatedState = { ...currentState };
+      // Toggle the user in the list
+      if (updatedState.users.includes(userId)) {
+        updatedState.users = updatedState.users.filter(id => id !== userId);
+      } else {
+        updatedState.users = [...updatedState.users, userId];
+      }
+      return updatedState;
+    });
+  };
+
+  const handleDeleteChannel = (channelId) => {
+    const updatedChannels = channelsState.filter(channel => channel.id !== channelId);
+    setChannelsState(updatedChannels);
   };
 
   return (
@@ -166,6 +190,18 @@ const Channels = (props) => {
                 type="text"
                 placeholder="Enter Channel Description"
               />
+              {/* Display users to select */}
+              <Form.Field>
+                <label>Users</label>
+                {Object.keys(allUsers).map(userId => (
+                  <Checkbox
+                    key={userId}
+                    label={allUsers[userId].displayName}
+                    checked={channelAddState.users.includes(userId)}
+                    onChange={() => handleUserCheckboxChange(userId)}
+                  />
+                ))}
+              </Form.Field>
             </Segment>
           </Form>
         </Modal.Content>
