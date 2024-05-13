@@ -1,3 +1,19 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .formContainer {
   background-color: #a7bcff;
   height: 100vh;
@@ -74,20 +90,25 @@
   background-color: #a7bcff;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 
   .container {
+    display: flex;
+    flex: 1; /* Fill remaining space */
     border: 1px solid white;
     border-radius: 10px;
     width: 65%;
-    height: 80%;
-    display: flex;
-    overflow: hidden;
+    height: 100%;
+    overflow: hidden; /* Hide overflowing content */
     @include tablet {
       width: 90%;
     }
-
+    .right-sidebar {
+      flex: 1;
+      background-color: #3e3c61;
+      position: relative;
+    }
     .sidebar {
       flex: 1;
       background-color: #3e3c61;
@@ -138,10 +159,6 @@
         border-bottom: 1px solid gray;
 
         .searchForm {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          height: 100%; /* or any specific height you want */
           padding: 10px;
 
           input {
@@ -170,8 +187,8 @@
         }
 
         img {
-          width: 60px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           object-fit: cover;
         }
@@ -189,7 +206,7 @@
       }
     }
     .chat {
-      flex: 2;
+      flex: 4;
 
       .chatInfo {
         height: 50px;
@@ -215,10 +232,7 @@
         background-color: #ddddf7;
         padding: 10px;
         height: calc(100% - 160px);
-
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
+        overflow: scroll;
 
         .message {
           display: flex;
