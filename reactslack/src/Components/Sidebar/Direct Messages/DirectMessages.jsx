@@ -1,29 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const PrivateChat = () => {
   const [privateChats, setPrivateChats] = useState([]);
   const [newPrivateChatName, setNewPrivateChatName] = useState("");
+  const [error, setError] = useState("");
 
-  const handleAddPrivateChat = () => {
+  useEffect(() => {
+    fetchPrivateChats();
+  }, []);
+
+  const fetchPrivateChats = async () => {
+    try {
+      const response = await axios.get('/api/private-chats'); // Replace with your actual backend endpoint
+      setPrivateChats(response.data);
+    } catch (error) {
+      setError("Failed to fetch private chats.");
+    }
+  };
+
+  const handleAddPrivateChat = async () => {
     if (newPrivateChatName.trim() === "") {
       return;
     }
-    const newPrivateChat = {
-      id: privateChats.length + 1,
-      name: newPrivateChatName
-    };
-    setPrivateChats([...privateChats, newPrivateChat]);
-    setNewPrivateChatName("");
+
+    try {
+      const response = await axios.post('/api/private-chats', { name: newPrivateChatName }); // Replace with your actual backend endpoint
+      setPrivateChats([...privateChats, response.data]);
+      setNewPrivateChatName("");
+    } catch (error) {
+      setError("Failed to add private chat.");
+    }
   };
 
-  const handleDeletePrivateChat = (chatId) => {
-    const updatedPrivateChats = privateChats.filter(chat => chat.id !== chatId);
-    setPrivateChats(updatedPrivateChats);
+  const handleDeletePrivateChat = async (chatId) => {
+    try {
+      await axios.delete(`/api/private-chats/${chatId}`); // Replace with your actual backend endpoint
+      const updatedPrivateChats = privateChats.filter(chat => chat.id !== chatId);
+      setPrivateChats(updatedPrivateChats);
+    } catch (error) {
+      setError("Failed to delete private chat.");
+    }
   };
 
   return (
     <div>
       <h2>Direct Messages</h2>
+      {error && <div>Error: {error}</div>}
       <ul>
         {/* Render list of private chats */}
         {privateChats.map(chat => (
