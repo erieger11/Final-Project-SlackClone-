@@ -49,7 +49,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="leftSidebar">
       <h1>RubberMan 10.0</h1>
       <h2>Channels</h2>
       <ul>
