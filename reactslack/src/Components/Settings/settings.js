@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom'; // Import for navigation
 
 const Settings = () => {
@@ -58,8 +59,8 @@ const Settings = () => {
 
   const handleLogout = () => {
     // Implement your logout logic here (e.g., clear user data, session, etc.)
-    // Redirect to the default page (assumed to be home)
-    navigate('/'); // Navigate to the root path (likely your home page)
+    // Redirect to login page after logout
+    navigate('/login');
   };
 
   return (
