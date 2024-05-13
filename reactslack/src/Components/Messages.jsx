@@ -3,7 +3,7 @@ import Message from './Message';
 
 const Messages = ({ messages }) => {
   if (!messages || messages.length === 0) {
-    return <p>No messages yet</p>;
+    return <p>Start conversation here!</p>;
   }
 
   return (

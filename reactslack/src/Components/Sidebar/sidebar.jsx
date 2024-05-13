@@ -47,7 +47,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="leftSidebar">
+    <div className="sidebar">
       <h1>RubberMan 10.0</h1>
       <h2>Channels</h2>
       <ul>
