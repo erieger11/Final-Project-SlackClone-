@@ -32,7 +32,7 @@ public class Channel implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "channels", "members" }, allowSetters = true)
     private Workspace workspace;
 
@@ -41,7 +41,7 @@ public class Channel implements Serializable {
     @JsonIgnoreProperties(value = { "channel", "userProfile", "mentions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "channels")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "channels")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "user", "messages", "mentions", "workspaces", "channels" }, allowSetters = true)
     private Set<UserProfile> members = new HashSet<>();
