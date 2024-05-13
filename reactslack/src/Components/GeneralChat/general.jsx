@@ -15,7 +15,7 @@ const Message = () => {
   async function getMessagesAndTimestamps(channelId, jwt) {
     const storedJWT = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:8080/api/channels/${channelId}`, {
+      const response = await fetch(`http://localhost:8080/api/channels/1`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -97,6 +97,8 @@ const Message = () => {
 
   const [room, setRoom] = useState('');
 
+
+
   const joinRoom = () => {
     if (room.trim() === 'General') {
       setRoom('1');
@@ -106,6 +108,11 @@ const Message = () => {
       alert('Please enter a room number.');
     }
   };
+
+// useEffect(() => {
+//     joinRoom();
+//   }, []);
+
 
   const sendMessage = () => {
     if (messageText.trim() !== '') {

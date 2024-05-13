@@ -58,7 +58,7 @@ const Sidebar = () => {
        {channels.map(channel => (
          <li key={channel.id}>
            <a href={`/${channel.name.replace(/\s+/g, '-')}`}>{channel.name}</a>
-           
+
          </li>
        ))}
       </ul>
