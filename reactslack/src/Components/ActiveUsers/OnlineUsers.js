@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from 'react';
 
 const OnlineUsers = () => {
-  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchOnlineUsers = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch('your_api_endpoint/online_users'); // Replace with your actual API endpoint
+        const response = await fetch('http://localhost:8080/api/user-profiles/'); // Replace with your actual API endpoint
         const users = await response.json();
-        setOnlineUsers(users);
+        setUsers(users);
       } catch (err) {
         setError(err.message);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchOnlineUsers();
+    fetchUsers();
   }, []);
 
   const renderUsers = () => {
     if (isLoading) {
-      return <p>Loading online users...</p>;
+      return <p>Loading users...</p>;
     } else if (error) {
       return <p>Error: {error}</p>;
     } else {
       return (
         <div className="online-users-container">
-          {onlineUsers.map((user, index) => (
+          {users.map((user, index) => (
             <div className="user-card" key={user.id}>
               <img
-                src={getProfilePictureUrl(user) || 'default_profile_picture.jpg'} // Default image if getProfilePictureUrl returns falsy
+                src={getProfilePictureUrl(user) || 'https://d3lzcn6mbbadaf.cloudfront.net/media/details/friend_zQn7K9N.jpg'} // Default image if getProfilePictureUrl returns falsy
                 alt={`${user.username} profile picture`}
               />
-              <p>{user.username}</p>
+              <p>
+                {user.username} {user.fullName && `(${user.fullName})`}{' '}
+              </p>
             </div>
           ))}
         </div>
@@ -50,7 +52,7 @@ const OnlineUsers = () => {
 
   return (
     <div>
-      <h2>Online Users</h2>
+      <h2>Online Users</h2> {/* Changed title to "All Users" */}
       {renderUsers()}
     </div>
   );
