@@ -44,7 +44,7 @@ import './RightSidebar.css';
 
 function RightSidebar() {
   return (
-    <div className="rightSidebar">
+    <div className="right-sidebar">
       <h2>Users</h2>
       <ul>
         <li>Home</li>
