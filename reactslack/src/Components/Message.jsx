@@ -1,17 +1,15 @@
 import React from 'react';
 import Jane from './Assets/Chris.jpg';
-import profile from './Assets/profile.jpg';
 
-const Message = () => {
+const Message = ({ msg }) => {
   return (
-    <div className="message owner">
+    <div className="message">
       <div className="messageInfo">
         <img src={Jane} alt="" />
         <span>just now</span>
       </div>
       <div className="messageContent">
-        <p>hello</p>
-        <img src={profile} alt="Profile" />
+        <p>{msg}</p>
       </div>
     </div>
   );

@@ -23,11 +23,13 @@ entity Message {
 // Mentions entity
 entity Mention {
   userName String required,
-  text String required
+  body String required
 }
 
+
+
 relationship OneToOne {
-     UserProfile{user(login)} to User with builtInEntity
+     UserProfile{user(login)} to User{userProfile} with builtInEntity
 }
 
 // Many-to-Many relationship between Workspace and UserProfile for Members
@@ -45,19 +47,19 @@ relationship ManyToMany {
   UserProfile{channels} to Channel{members}
 }
 
-// Many-to-One relationship between Message and UserProfile for sender
-relationship ManyToOne {
-  UserProfile{messages} to Message{sender},
-  Message{author} to UserProfile{messages},
-  Mention{author} to UserProfile{messages}
-}
-
 // Many-to-One relationship between Message and Channel for channel
 relationship ManyToOne {
-  Channel{messages} to Message{channel}
+   Message{channel} to Channel{messages}
 }
 
 // Many-to-One relationship between Mention and Message
 relationship ManyToOne {
-  Message{mentions} to Mention{message}
+   Mention{message} to Message{mentions}
 }
+
+// Many-to-One relationship between Message and UserProfile for userProfile
+relationship OneToMany {
+UserProfile{messages} to Message{userProfile},
+UserProfile{mention} to Mention{userProfile}
+}
+

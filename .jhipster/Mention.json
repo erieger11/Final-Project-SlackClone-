@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240501180647"
+    "changelogDate": "20240510184019"
   },
   "applications": "*",
   "fields": [
@@ -10,7 +10,7 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "text",
+      "fieldName": "body",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     }
@@ -21,8 +21,15 @@
       "otherEntityName": "message",
       "otherEntityRelationshipName": "mentions",
       "relationshipName": "message",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "mention",
+      "relationshipName": "userProfile",
       "relationshipSide": "right",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no"
