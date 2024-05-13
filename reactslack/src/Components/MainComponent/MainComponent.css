@@ -88,10 +88,9 @@
       width: 90%;
     }
 
-    .sidebar {
-      flex: 1;
-      background-color: #3e3c61;
-      position: relative;
+    .sidebar,
+    .right-sidebar {
+      width: 190px;
 
       .navbar {
         display: flex;

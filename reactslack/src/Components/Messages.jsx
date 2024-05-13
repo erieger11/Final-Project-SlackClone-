@@ -1,5 +1,5 @@
-import React from "react";
-import Message from "./Message";
+import React from 'react';
+import Message from './Message';
 
 const Messages = ({ messages }) => {
   if (!messages || messages.length === 0) {
@@ -16,5 +16,3 @@ const Messages = ({ messages }) => {
 };
 
 export default Messages;
-
-
