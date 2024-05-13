@@ -10,7 +10,7 @@ function OfflineUsers({ users }) {
     <ul className="offline-users">
       {users.map(user => (
         <li key={user.id}>
-          <img src={user.profilePictureUrl} alt={user.username + ' profile picture'} />
+          <img src={'http://localhost:8080/api/user-profiles/'} alt={user.username + ' profile picture'} />
           <span>{user.username}</span>
         </li>
       ))}
