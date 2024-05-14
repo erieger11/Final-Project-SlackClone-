@@ -1,34 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Settings from '../Settings/settings';
-import OnlineUsers from '../ActiveUsers/OnlineUsers.js';
-import OfflineUsers from '../ActiveUsers/OfflineUsers.js';
+import Users from '../Users/users';
+import Profile from '../UserProfileData/userprofiledata';
 import './RightSidebar.css'; // Assuming the CSS file remains the same
 
-const RightSidebar = () => {
-  // State for the active tab
-  const [activeTab, setActiveTab] = useState('');
+const user = localStorage.getItem('authenticatedUsername');
 
-  // State for user profile picture URL
+const RightSidebar = () => {
+  const [activeTab, setActiveTab] = useState('');
   const [profilePictureUrl, setProfilePictureUrl] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const handleTabChange = tabName => {
     setActiveTab(tabName);
   };
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Settings':
-        return <Settings />;
-      case 'OnlineUsers':
-        return <OnlineUsers />;
-      case 'OfflineUsers':
-        return <OfflineUsers />;
-      default:
-        return null;
-    }
-  };
-
-  // Fetch user profile picture on component mount (assuming a fetchUserProfilePicture function)
   useEffect(() => {
     const fetchUserProfilePicture = async () => {
       try {
@@ -36,34 +22,40 @@ const RightSidebar = () => {
         setProfilePictureUrl(url);
       } catch (err) {
         console.error('Error fetching profile picture:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserProfilePicture();
-  }, []); // Run on component mount
+  }, []);
 
   return (
     <div className="right-side-bar">
       <div className="user-profile">
-        {profilePictureUrl ? (
-          <img src={profilePictureUrl} alt="User Profile Picture" />
+        {loading ? (
+          <div className="profile-placeholder">Loading...</div>
+        ) : profilePictureUrl ? (
+          <img src={profilePictureUrl} alt="User Profile" />
         ) : (
-          <div className="profile-placeholder">Welcome</div>
+          <div className="profile-placeholder">User</div>
         )}
+        <h2>{user}</h2>
       </div>
-      <h2>Table Talkers</h2>
       <ul className="right-sidebar-tabs">
+        <li className={activeTab === 'Profile' ? 'active' : ''} onClick={() => handleTabChange('Profile')}>
+          Profile
+        </li>
         <li className={activeTab === 'Settings' ? 'active' : ''} onClick={() => handleTabChange('Settings')}>
           Settings
         </li>
-        <li className={activeTab === 'OnlineUsers' ? 'active' : ''} onClick={() => handleTabChange('OnlineUsers')}>
-          Online
-        </li>
-        <li className={activeTab === 'OfflineUsers' ? 'active' : ''} onClick={() => handleTabChange('OfflineUsers')}>
-          Offline
+        <li className={activeTab === 'Users' ? 'active' : ''} onClick={() => handleTabChange('Users')}>
+          Users
         </li>
       </ul>
-      {renderContent()}
+      {activeTab === 'Profile' && <Profile />}
+      {activeTab === 'Settings' && <Settings />}
+      {activeTab === 'Users' && <Users />}
     </div>
   );
 };

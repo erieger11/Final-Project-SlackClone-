@@ -69,7 +69,15 @@
 
 .right-side-bar ul li {
   margin-bottom: 10px;
-  cursor: pointer; /* Set default cursor to pointer for all list items */
+  cursor: pointer;
+  font-weight: normal; /* Reset font weight to normal for all list items */
+}
+
+.right-side-bar ul li.active {
+  font-weight: bold; /* Set font weight to bold for active tab */
+}
+.profile-placeholder {
+  text-decoration: underline;
 }
 
 /* Channel link style (assuming no links in RightSidebar currently) */
