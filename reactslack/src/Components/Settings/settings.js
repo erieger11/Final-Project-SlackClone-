@@ -60,7 +60,7 @@ const Settings = () => {
   const handleLogout = () => {
     // Implement your logout logic here (e.g., clear user data, session, etc.)
     // Redirect to login page after logout
-    navigate('/login');
+    navigate('/');
   };
 
   return (
