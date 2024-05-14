@@ -94,7 +94,6 @@ const sendMessage = () => {
           <FaUserPlus />
         </div>
       </div>
-      // Render the messages component with the messages array.
       <Messages messages={messages} />
       <div className="input">
         <input
