@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import { connect } from "react-redux";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { setChannel } from "./../../store/actioncreator";
 import { Notification } from "./Notification/notification";
 import "./Channels.css";
@@ -232,4 +232,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+
 export default (mapStateToProps, mapDispatchToProps)(Channels);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Channels);
+//ethan
+
